@@ -1,0 +1,15 @@
+- hosts: computer
+  tasks:
+    - name: Install common software
+      apt: pkg={{ item }} state=latest update_cache=true
+      with_items:
+        - elinks
+        - git
+        - htop
+        - iftop
+        - iotop
+        - nmap
+        - ntp
+        - tree
+        - sl
+        - whois

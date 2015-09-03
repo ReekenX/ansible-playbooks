@@ -2,6 +2,7 @@
   tasks:
     - name: Install common software
       apt: pkg={{ item }} state=latest update_cache=true
+      remote_user: root
       with_items:
         - elinks
         - git

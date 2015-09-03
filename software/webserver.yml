@@ -2,7 +2,6 @@
   tasks:
     - name: Install webserver software
       apt: pkg={{ item }} state=latest update_cache=true
-      remote_user: root
       with_items:
         - apache2
         - npm

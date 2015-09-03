@@ -1,4 +1,4 @@
-- hosts: computer
+- hosts: all
   tasks:
     - name: Install common software
       apt: pkg={{ item }} state=latest update_cache=true

@@ -1,0 +1,10 @@
+- hosts: webservers
+  tasks:
+    - name: Install webserver software
+      apt: pkg={{ item }} state=latest update_cache=true
+      with_items:
+        - apache2
+        - npm
+        - nodejs
+        - python-dev
+        - python-virtualenv

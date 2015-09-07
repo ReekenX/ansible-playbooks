@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+    - name: Default failed commands report policy
+      lineinfile: dest=/etc/default/cron regexp=^MAILTO= line=MAILTO=webmaster@jarmalavicius.lt

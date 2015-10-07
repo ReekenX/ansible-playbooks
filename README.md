@@ -1,21 +1,27 @@
 # Ansible playbooks
 
-My personal (but reusable) migration files from SaltStack (see https://github.com/ReekenX/salt-configs) to Ansible.
+My personal (but reusable) `Ansible` automation.
 
-# Why to migrate?
+Previously I have used SaltStack for automation (see https://github.com/ReekenX/salt-configs) but due to many reasons switched to Ansible.
 
-I have three main reasons to do so (but in fact there are couple of more):
+# Is Ansible > SaltStack?
 
-- Poor SaltStack result output.
+No, not really.
+
+I didn't liked very much couple of things in SaltStack which made whole deployment-automation unproductive:
+
+- Poor results output.
 - Too complex task dependencies management system.
-- Master-slave communication (yes, I know such thing as salt-ssh exists)
+- Master-slave communication (yes, I know such thing as salt-ssh exists).
 
 # References
 
-My personal (but reusable) repository for SaltStack configurations: https://github.com/ReekenX/salt-configs
+My SaltStack configurations: https://github.com/ReekenX/salt-configs
 
 # Bugs
 
-This project has no bugs. But you can file requests or to discuss something.
+This project has no bugs.
 
-You can leave a comment in: https://github.com/ReekenX/ansible-playbooks/issues
+But feel free to file any request or discuss something by creating a new issue: https://github.com/ReekenX/ansible-playbooks/issues
+
+I normally respond in less than a day. Or just e-mail me (see my profile for e-mail).

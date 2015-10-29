@@ -13,3 +13,6 @@
 
     - name: Expand files
       shell: git checkout -f
+
+    - name: Install requirements
+      shell: git submodule update --init

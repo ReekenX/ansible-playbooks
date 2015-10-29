@@ -22,6 +22,6 @@ My `SaltStack` configurations: https://github.com/ReekenX/salt-configs
 
 This project has no bugs.
 
-But feel free to file any request or discuss something by creating a new issue: https://github.com/ReekenX/ansible-playbooks/issues
+But feel free to file any requests or discuss something by creating a new issue: https://github.com/ReekenX/ansible-playbooks/issues
 
 I normally respond in less than a day. Or just e-mail me (see my profile for e-mail).

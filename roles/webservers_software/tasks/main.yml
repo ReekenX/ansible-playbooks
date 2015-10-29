@@ -1,0 +1,14 @@
+---
+# Install commom webserver software
+
+- name: Install webserver software
+  sudo: true
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - apache2
+    - npm
+    - nodejs
+    - python-dev
+    - python-virtualenv
+- name: ensure apache2 is running
+  service: name=apache2 state=started enabled=yes

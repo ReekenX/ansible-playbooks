@@ -1,0 +1,17 @@
+---
+# Setup dotfiles for local server user
+
+- name: Clean repo if exists
+  shell: rm -rf ~/.git/ ~/.vim/ ~/.gitconfig.d/ ~/.tmux-plugins .install-dotfiles-home.sh .gitmodules .viminfo
+
+- name: Install repository
+  shell: git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git ~/.git
+
+- name: Configure repository
+  shell: git config core.bare false
+
+- name: Expand files
+  shell: git checkout -f
+
+- name: Install requirements
+  shell: git submodule update --init

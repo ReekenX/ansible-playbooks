@@ -2,13 +2,17 @@
 # Install backups (each machine will have it's own backups script)
 
 - name: Install backups software
+  sudo: true
   copy: src=../../../private/backups/dropbox-uploader dest=/usr/sbin/dropbox-uploader
 
 - name: Install backups software credentials
+  sudo: true
   copy: src=../../../private/backups/.dropbox_tokens dest=~/.dropbox_tokens
 
 - name: Install backups scripts
+  sudo: true
   copy: src=../../../private/backups/{{ ansible_fqdn }} dest=/usr/sbin/auto-backups
 
 - name: Install backups cron entry
+  sudo: true
   cron: name="Automatic backups to Dropbox" minute="0" hour="6" job="bash /usr/sbin/auto-backups | logger"

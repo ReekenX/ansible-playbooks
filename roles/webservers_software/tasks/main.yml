@@ -5,8 +5,8 @@
   sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
   with_items:
+    - git
     - apache2
-    - npm
     - nodejs
     - python-dev
     - python-virtualenv

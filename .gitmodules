@@ -4,3 +4,6 @@
 [submodule "roles/geerlingguy.java"]
 	path = roles/geerlingguy.java
 	url = https://github.com/geerlingguy/ansible-role-java.git
+[submodule "roles/nagios"]
+	path = roles/nagios
+	url = https://github.com/osiell/ansible-nagios-server.git

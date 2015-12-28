@@ -1,0 +1,11 @@
+---
+- hosts: qa_webservers
+  roles:
+    - common
+    - webservers
+    - backups
+    - dotfiles
+    - cron
+    - jenkins
+  vars:
+    - jenkins_connection_retries: 60

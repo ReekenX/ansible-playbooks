@@ -7,3 +7,6 @@
 [submodule "roles/nagios"]
 	path = roles/nagios
 	url = https://github.com/osiell/ansible-nagios-server.git
+[submodule "roles/gitolite"]
+	path = roles/gitolite
+	url = https://github.com/silpion/ansible-gitolite.git

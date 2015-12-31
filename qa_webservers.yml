@@ -6,5 +6,6 @@
     - backups
     - dotfiles
     - cron
-    - jenkins
-    - nagios
+#     - jenkins
+#     - nagios
+#     - gitolite

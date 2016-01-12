@@ -2,13 +2,34 @@
 # Install commom webserver software
 
 - name: Install webserver software
-  sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
   with_items:
     - git
+    - mercurial
     - apache2
     - nodejs
+    - npm
     - python-dev
     - python-virtualenv
-- name: ensure apache2 is running
+    - build-essential
+    - sloccount
+
+- name: Ensure apache2 is running
   service: name=apache2 state=started enabled=yes
+
+- name: Install Python PIL support
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - libjpeg8
+    - libjpeg8-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-imaging
+
+- name: Complete PIL support setup
+  shell: "{{ item }}"
+  with_items:
+    - ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+    - ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+    - ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib

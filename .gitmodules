@@ -10,3 +10,6 @@
 [submodule "roles/gitolite"]
 	path = roles/gitolite
 	url = https://github.com/silpion/ansible-gitolite.git
+[submodule "roles/fail2ban"]
+	path = roles/fail2ban
+	url = https://github.com/nickjj/ansible-fail2ban.git

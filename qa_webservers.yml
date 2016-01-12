@@ -1,6 +1,7 @@
 ---
 - hosts: qa_webservers
   roles:
+    - motd
     - common
     - webservers
     - backups

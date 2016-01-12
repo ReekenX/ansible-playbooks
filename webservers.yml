@@ -1,6 +1,7 @@
 ---
 - hosts: webservers
   roles:
+    - motd
     - common
     - webservers
     - backups

@@ -13,3 +13,6 @@
 [submodule "roles/fail2ban"]
 	path = roles/fail2ban
 	url = https://github.com/nickjj/ansible-fail2ban.git
+[submodule "roles/logcheck"]
+	path = roles/logcheck
+	url = https://github.com/Oefenweb/ansible-logcheck.git

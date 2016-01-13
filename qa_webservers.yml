@@ -7,6 +7,8 @@
     - backups
     - dotfiles
     - cron
+    - fail2ban
+    - logcheck
 #     - jenkins
 #     - nagios
 #     - gitolite

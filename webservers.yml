@@ -8,3 +8,4 @@
     - dotfiles
     - cron
     - fail2ban
+    - logcheck

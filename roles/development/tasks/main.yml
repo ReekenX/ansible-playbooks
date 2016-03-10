@@ -1,0 +1,44 @@
+---
+#  Install development software
+- name: Install development software
+  sudo: true
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - elinks
+    - git
+    - htop
+    - iftop
+    - iotop
+    - nmap
+    - ntp
+    - tree
+    - sl
+    - whois
+    - bc
+    - vim
+    - openssh-server
+    - zsh
+    - mc
+    - tmux
+    - phpunit
+    - ruby
+    - ruby-dev
+    - python-software-properties
+    - software-properties-common
+    - postfix
+    - silversearcher-ag
+    - vim-nox
+    - memcached
+    - tig
+    - xclip
+    - git-extras
+    - filezilla
+
+
+# TODO: mailtrap configuration
+# TODO: neovim installation with ppa
+# TODO: tmuxinator installation with ppa
+# TODO: gem install git-up
+# TODO: gem install compass
+# TODO: enable php short tags
+# TODO: fix node with: sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 99

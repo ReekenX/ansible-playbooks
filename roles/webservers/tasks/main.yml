@@ -2,22 +2,38 @@
 # Install commom webserver software
 
 - name: Install webserver software
+  sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
   with_items:
     - git
     - mercurial
-    - apache2
     - nodejs
     - npm
     - python-dev
     - python-virtualenv
     - build-essential
     - sloccount
+    - apache2
+    - php5
+    - php5-cli
+    - php5-mysql
+    - php5-gd
+    - php5-pgsql
+    - php5-readline
+    - php5-sqlite
+    - php5-imagick
+    - php5-memcache
+    - php5-memcached
+    - php5-redis
+    - php5-curl
+    - libapache2-mod-php5
+    - mysql-server
 
 - name: Ensure apache2 is running
   service: name=apache2 state=started enabled=yes
 
 - name: Install Python PIL support
+  sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
   with_items:
     - libjpeg8
@@ -28,8 +44,18 @@
     - python-imaging
 
 - name: Complete PIL support setup
+  sudo: true
   shell: "{{ item }}"
   with_items:
-    - ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
-    - ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
-    - ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+    - ln -f -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+    - ln -f -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+    - ln -f -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+
+- name: Enable apache2 modules
+  sudo: true
+  shell: "{{ item }}"
+  with_items:
+    - a2enmod rewrite
+    - a2enmod ssl
+    - a2enmod expires
+    - /etc/init.d/apache2 restart

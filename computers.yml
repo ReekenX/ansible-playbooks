@@ -1,0 +1,8 @@
+---
+- hosts: computers
+  roles:
+    - motd
+    - common
+    - development
+    - webservers
+    - dotfiles

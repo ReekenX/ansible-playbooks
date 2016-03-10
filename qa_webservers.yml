@@ -4,11 +4,11 @@
     - motd
     - common
     - webservers
-    - backups
     - dotfiles
     - cron
     - fail2ban
     - logcheck
+    - backups
 #     - jenkins
 #     - nagios
 #     - gitolite

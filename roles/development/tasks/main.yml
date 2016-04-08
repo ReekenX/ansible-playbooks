@@ -1,5 +1,5 @@
----
 #  Install development software
+---
 - name: Install development software
   sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
@@ -20,7 +20,6 @@
     - zsh
     - mc
     - tmux
-    - phpunit
     - ruby
     - ruby-dev
     - python-software-properties
@@ -33,6 +32,10 @@
     - xclip
     - git-extras
     - filezilla
+    - deluged
+    - deluge-web
+    - mpv
+    - entr
 
 
 # TODO: mailtrap configuration
@@ -42,3 +45,7 @@
 # TODO: gem install compass
 # TODO: enable php short tags
 # TODO: fix node with: sudo update-alternatives --install /usr/bin/node node /usr/bin/nodejs 99
+# TODO: phpunit, but not from apt-get but from some source
+# TODO: sud pip install fabric
+# TODO: check ytec is-my-setup for more packages
+# TODO: setup psr2: sudo phpcs --config-set default_standard PSR2

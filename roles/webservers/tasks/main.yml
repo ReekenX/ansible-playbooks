@@ -4,6 +4,7 @@
 - name: Install webserver software
   sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
+  ignore_errors: True
   with_items:
     - git
     - mercurial
@@ -35,6 +36,7 @@
 - name: Install Python PIL support
   sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
+  ignore_errors: True
   with_items:
     - libjpeg8
     - libjpeg8-dev

@@ -30,6 +30,8 @@
     - libapache2-mod-php5
     - mysql-server
     - locales-all
+    - libxml2-dev
+    - libxslt1-dev
 
 - name: Ensure apache2 is running
   service: name=apache2 state=started enabled=yes

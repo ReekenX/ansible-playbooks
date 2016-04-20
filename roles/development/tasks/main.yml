@@ -36,6 +36,7 @@
     - deluge-web
     - mpv
     - entr
+    - clipit
 
 
 # TODO: mailtrap configuration

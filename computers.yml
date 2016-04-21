@@ -1,6 +1,7 @@
 ---
 - hosts: computers
   roles:
+    - cleanup
     - motd
     - common
     - development

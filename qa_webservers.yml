@@ -1,6 +1,7 @@
 ---
 - hosts: qa_webservers
   roles:
+    - cleanup
     - motd
     - common
     - webservers
@@ -9,6 +10,7 @@
     - fail2ban
     - logcheck
     - backups
-#     - jenkins
-#     - nagios
-#     - gitolite
+    - cleanup
+#   - jenkins
+#   - nagios
+#   - gitolite

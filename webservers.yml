@@ -4,6 +4,7 @@
     - motd
     - common
     - webservers
+    - apache
     - backups
     - dotfiles
     - cron

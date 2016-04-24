@@ -5,6 +5,10 @@
   sudo: true
   copy: src=../../../private/backups/dropbox-uploader dest=/usr/sbin/dropbox-uploader
 
+- name: Make backup script executable
+  sudo: true
+  shell: chmod +x /usr/sbin/dropbox-uploader
+
 - name: Install backups software credentials
   sudo: true
   copy: src=../../../private/backups/.dropbox_tokens dest=~/.dropbox_tokens

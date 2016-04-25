@@ -26,6 +26,7 @@
     - php5-memcached
     - php5-redis
     - php5-curl
+    - php-zip
     - mysql-server
     - locales-all
     - libxml2-dev

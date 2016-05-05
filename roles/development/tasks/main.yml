@@ -37,6 +37,7 @@
     - mpv
     - entr
     - clipit
+    - redis-tools
 
 
 # TODO: mailtrap configuration

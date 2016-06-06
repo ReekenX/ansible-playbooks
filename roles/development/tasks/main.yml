@@ -37,6 +37,8 @@
     - mpv
     - entr
     - clipit
+    - python-pylibmc
+    - libmemcached-dev
 
 
 # TODO: mailtrap configuration

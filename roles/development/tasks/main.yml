@@ -39,6 +39,7 @@
     - clipit
     - python-pylibmc
     - libmemcached-dev
+    - redis-tools
 
 
 # TODO: mailtrap configuration

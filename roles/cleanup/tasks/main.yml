@@ -9,6 +9,7 @@
     - samba
     - samba-client
     - samba-common
+    - samba-libs
     - python-samba
 
 - name: Removing useless packages

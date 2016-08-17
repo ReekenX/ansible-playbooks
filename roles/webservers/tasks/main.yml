@@ -7,6 +7,7 @@
   ignore_errors: True
   with_items:
     - sqlite3
+    - libsqlite3-dev
     - mysql-server
     - libmysqlclient-dev
 
@@ -40,7 +41,6 @@
     - libxml2-dev
     - libxslt1-dev
     - passenger
-    - libapache2-mod-passenger
 
 - name: Install tools for monitoring
   sudo: true

@@ -1,6 +1,15 @@
 ---
 # Install commom webserver software
 
+- name: Install database tools
+  sudo: true
+  apt: pkg={{ item }} state=latest update_cache=true
+  ignore_errors: True
+  with_items:
+    - sqlite3
+    - mysql-server
+    - libmysqlclient-dev
+
 - name: Install webserver software
   sudo: true
   apt: pkg={{ item }} state=latest update_cache=true
@@ -27,10 +36,19 @@
     - php5-redis
     - php5-curl
     - php-zip
-    - mysql-server
     - locales-all
     - libxml2-dev
     - libxslt1-dev
+    - passenger
+    - libapache2-mod-passenger
+
+- name: Install tools for monitoring
+  sudo: true
+  apt: pkg={{ item }} state=latest update_cache=true
+  ignore_errors: True
+  with_items:
+    - munin-node
+    - nagios-nrpe-server
 
 - name: Install Python PIL support
   sudo: true
@@ -39,6 +57,7 @@
   with_items:
     - libjpeg8
     - libjpeg8-dev
+    - libjpeg-dev
     - libfreetype6
     - libfreetype6-dev
     - zlib1g-dev

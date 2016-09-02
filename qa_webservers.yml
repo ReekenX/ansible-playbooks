@@ -1,6 +1,7 @@
 ---
 - hosts: qa_webservers
   roles:
+    - locales
     - cleanup
     - motd
     - common

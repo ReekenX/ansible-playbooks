@@ -1,0 +1,10 @@
+---
+# Install all locales
+
+- name: Install all system available locales
+  sudo: true
+  shell: "{{ item }}"
+  with_items:
+    - rm /var/lib/locales/supported.d/*
+    - ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
+    - locale-gen

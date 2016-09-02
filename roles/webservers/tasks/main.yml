@@ -36,6 +36,7 @@
     - php5-memcached
     - php5-redis
     - php5-curl
+    - php5-mcrypt
     - php-zip
     - locales-all
     - libxml2-dev

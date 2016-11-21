@@ -39,7 +39,12 @@
     - libmemcached-dev
     - redis-tools
     - mysql-client
+    - libmysqlclient-dev
     - python-pip
+    - meld
+    - libsqlite3-dev
+    - g++
+    - nautilus-dropbox
 
 - name: Install git-up
   sudo: true

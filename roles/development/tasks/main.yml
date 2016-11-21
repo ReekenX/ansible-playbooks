@@ -67,3 +67,5 @@
 # TODO: sud pip install fabric
 # TODO: check ytec is-my-setup for more packages
 # TODO: setup psr2: sudo phpcs --config-set default_standard PSR2
+# TODO: Docker from https://docs.docker.com/engine/installation/linux/ubuntulinux/
+# TODO: Docker compose from https://docs.docker.com/compose/install/

@@ -45,6 +45,8 @@
     - libsqlite3-dev
     - g++
     - nautilus-dropbox
+    - libpq-dev
+    - fabric
 
 - name: Install git-up
   sudo: true

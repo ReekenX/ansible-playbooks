@@ -11,7 +11,7 @@
     - fail2ban
     - logcheck
     - backups
-    - cleanup
+    - neovim
 #   - jenkins
 #   - nagios
 #   - gitolite

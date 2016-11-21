@@ -1,0 +1,16 @@
+---
+# Setup NeoVIM (VIM replacement)
+
+- name: Install NeoVIM PPA
+  sudo: true
+  apt_repository: repo='ppa:neovim-ppa/unstable' state=present
+
+- name: Update APT
+  sudo: true
+  apt: update_cache=yes
+
+- name: Remove default configs
+  shell: mv .config/nvim .config/nvim-default
+
+- name: Symlink configs
+  shell: cd .config && ln -s ../.vim nvim

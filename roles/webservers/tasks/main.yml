@@ -62,6 +62,7 @@
     - libfreetype6-dev
     - zlib1g-dev
     - python-imaging
+    - libjpeg-dev
 
 - name: Complete PIL support setup
   sudo: true

@@ -14,3 +14,7 @@
 
 - name: Symlink configs
   shell: cd .config && ln -s ../.vim nvim
+
+- name: Install Python support
+  sudo: true
+  shell: pip install neovim

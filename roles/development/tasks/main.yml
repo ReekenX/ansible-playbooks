@@ -48,6 +48,7 @@
     - libpq-dev
     - fabric
     - sqlite3
+    - jq
 
 - name: Install git-up
   sudo: true

@@ -54,6 +54,7 @@
     - pylint
     - pep8
     - libsqlite3-dev
+    - meld
 
 - name: Install git-up
   sudo: true

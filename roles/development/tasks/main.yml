@@ -66,6 +66,10 @@
   sudo: true
   shell: gem install tmuxinator
 
+- name: Install GEMs installer
+  sudo: true
+  shell: gem install bundle
+
 - name: Install livereload
   sudo: true
   shell: pip install livereload

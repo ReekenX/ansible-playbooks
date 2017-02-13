@@ -53,6 +53,7 @@
     - exuberant-ctags
     - pylint
     - pep8
+    - libsqlite3-dev
 
 - name: Install git-up
   sudo: true

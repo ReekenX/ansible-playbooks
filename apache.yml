@@ -1,0 +1,36 @@
+---
+# Install apache and dependencies
+
+- hosts: all
+  tasks:
+    - name: Install apache webserver
+      sudo: true
+      apt: pkg={{ item }} state=latest update_cache=true
+      ignore_errors: True
+      with_items:
+        - apache2
+
+    - name: Install support for PHP, Ruby and Python
+      sudo: true
+      apt: pkg={{ item }} state=latest update_cache=true
+      ignore_errors: True
+      with_items:
+        - libapache2-mod-php5
+        - libapache2-mod-passenger
+        - libapache2-mod-wsgi
+
+    - name: Enable apache2 modules
+      sudo: true
+      shell: "{{ item }}"
+      with_items:
+        - a2enmod rewrite
+        - a2enmod ssl
+        - a2enmod expires
+        - a2enmod headers
+        - a2enmod proxy
+        - a2enmod proxy_http
+        - /etc/init.d/apache2 restart
+
+    - name: Ensure apache2 is running
+      service: name=apache2 state=started enabled=yes
+

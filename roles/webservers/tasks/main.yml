@@ -36,8 +36,17 @@
     - php5-memcached
     - php5-redis
     - php5-curl
+<<<<<<< Updated upstream
     - php5-mcrypt
     - php-zip
+||||||| merged common ancestors
+    - php-zip
+    - mysql-server
+    - locales-all
+=======
+    - mysql-server
+    - locales-all
+>>>>>>> Stashed changes
     - libxml2-dev
     - libxmlsec1-dev
     - libxslt1-dev

@@ -1,0 +1,19 @@
+---
+# Install all locales
+- hosts: all
+  tasks:
+    - name: Install all locales (Ubuntu only)
+      sudo: true
+      shell: "{{ item }}"
+      with_items:
+        - rm /var/lib/locales/supported.d/*
+        - ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
+        - locale-gen
+      when: ansible_os_family == "Ubuntu"
+
+    - name: Install all locales (Debian only)
+      sudo: true
+      apt: pkg={{ item }} state=latest update_cache=true
+      with_items:
+        - locales-all
+      when: ansible_os_family == "Debian"

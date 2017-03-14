@@ -46,17 +46,24 @@ Here is how I quickly install all locales on one of my machines:
 
     $ ansible-playbook locales.yml -i hosts -l server.example.org,
 
+![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
+
 Explanation:
 
 - locales.yml - is playbook file to run tasks from.
 - -i hosts - read servers list from file created earlier.
 - -l server.example.org, - apply playbook to single server only (comman is important!)
 
-![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
-
 To run your playbook on all servers:
 
     $ ansible-playbook locales.yml -i hosts
+
+# Playbooks included
+
+| File name   | Description                                                                   |
+|-------------|-------------------------------------------------------------------------------|
+| locales.yml | Install all locales on the server (useful when having multilingual projects)  |
+| apache.yml  | Install apache; configure to support PHP, Ruby and Python projects.           |
 
 # Is Ansible > SaltStack?
 

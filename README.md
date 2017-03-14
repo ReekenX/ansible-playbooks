@@ -1,12 +1,66 @@
 # Ansible playbooks
 
-My personal (but reusable) `Ansible` automation.
+Highly reusable `Ansible` automation playbooks.
 
-Previously I have used `SaltStack` for automation (see https://github.com/ReekenX/salt-configs) but due to many reasons switched to `Ansible`.
+`Ansible` is servers/computer automation system which makes saves your day from repeatable tasks. It is useful even if you do not have number of servers/computers to administrate.
+
+This repo gives you ability to reuse already created playbooks, extend those and use for repeatable installation/configuration processes.
+
+# How it works?
+
+Mainly you need two things:
+
+- Install `Ansible` on your computer. On servers - this NOT needed.
+- Define your computers/servers once in configuration file.
+- Learn how to run playbooks.
+
+All steps are very easy. Read next for tips.
+
+# Installing Ansible
+
+You can install it with:
+
+    $ sudo apt-get install ansible  # if you are on Ubuntu
+    $ sudo aptitude install ansible # if you are on Debian
+    $ sudo yum install ansible      # if you are on CentOs
+
+# Configure
+
+Craete `hosts` file with following syntax:
+
+    [all]
+    localhost
+    server.example.org
+    server.example.net
+    example.server.net
+
+Obviously - put all your computers/servers/machines in this one big list.
+
+Keep this list private.
+
+# Running playbooks
+
+There are many playbooks in this repo. Playbook is domain specific configuration file which you can run on single/multiple machines.
+
+Here is how I quickly install all locales on one of my machines:
+
+    $ ansible-playbook locales.yml -i hosts -l server.example.org,
+
+Explanation:
+
+- locales.yml - is playbook file to run tasks from.
+- -i hosts - read servers list from file created earlier.
+- -l server.example.org, - apply playbook to single server only (comman is important!)
+
+To run your playbook on all servers:
+
+    $ ansible-playbook locales.yml -i hosts
 
 # Is Ansible > SaltStack?
 
 No, not really.
+
+Previously I have used `SaltStack` for automation but due to many reasons switched to `Ansible`.
 
 I didn't liked very much couple of things in `SaltStack` which made whole deployment-automation unproductive:
 
@@ -22,6 +76,6 @@ My `SaltStack` configurations: https://github.com/ReekenX/salt-configs
 
 This project has no bugs.
 
-But feel free to file any requests or discuss something by creating a new issue: https://github.com/ReekenX/ansible-playbooks/issues
+But your feedback would be very valuable to me: https://github.com/ReekenX/ansible-playbooks/issues
 
 I normally respond in less than a day. Or just e-mail me (see my profile for e-mail).

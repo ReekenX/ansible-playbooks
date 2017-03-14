@@ -52,6 +52,8 @@ Explanation:
 - -i hosts - read servers list from file created earlier.
 - -l server.example.org, - apply playbook to single server only (comman is important!)
 
+![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
+
 To run your playbook on all servers:
 
     $ ansible-playbook locales.yml -i hosts

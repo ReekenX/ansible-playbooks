@@ -77,9 +77,7 @@ I didn't liked very much couple of things in `SaltStack` which made whole deploy
 - Too complex task dependencies management system.
 - Master-slave communication (yes, I know such thing as `salt-ssh` exists).
 
-# References
-
-My `SaltStack` configurations: https://github.com/ReekenX/salt-configs
+My old `SaltStack` configurations are here: https://github.com/ReekenX/salt-configs
 
 # Bugs
 

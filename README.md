@@ -65,6 +65,15 @@ To run your playbook on all servers:
 | locales.yml | Install all locales on the server (useful when having multilingual projects)  |
 | apache.yml  | Install apache; configure to support PHP, Ruby and Python projects.           |
 
+# Problems on Fedora
+
+If you using Fedora servers, you will need manually install two packages:
+
+    $ dnf install python
+    $ dnf install python-dnf
+
+And the rest will work just fine.
+
 # Is Ansible > SaltStack?
 
 No, not really.

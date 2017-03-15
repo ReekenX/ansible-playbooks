@@ -48,6 +48,9 @@
       - libxslt
       - libxslt-devel
       - redhat-rpm-config
+      - python-devel
+      - python3-devel
+      - memcached-devel
     when: ansible_os_family == "RedHat"
 
   - name: Install development packages for future stuff compiling (Debian based OS only)

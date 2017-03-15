@@ -51,6 +51,7 @@
       - python-devel
       - python3-devel
       - memcached-devel
+      - libmemcached-devel
     when: ansible_os_family == "RedHat"
 
   - name: Install development packages for future stuff compiling (Debian based OS only)

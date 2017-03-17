@@ -52,14 +52,8 @@
       - python3-devel
       - memcached-devel
       - libmemcached-devel
+      - gcc-c++
     when: ansible_os_family == "RedHat"
-
-  - name: Install development packages for future stuff compiling (Debian based OS only)
-    sudo: true
-    package: name={{ item }} state=present
-    with_items:
-      - ruby-dev
-    when: ansible_os_family == "Fedora"
 
   - name: Install gems
     gem: name={{ item }} state=present

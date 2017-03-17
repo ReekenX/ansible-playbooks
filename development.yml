@@ -53,6 +53,7 @@
       - memcached-devel
       - libmemcached-devel
       - gcc-c++
+      - mysql-devel
     when: ansible_os_family == "RedHat"
 
   - name: Install gems

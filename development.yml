@@ -38,7 +38,7 @@
       - python-virtualenv
       - pylint
 
-  - name: Install development packages for future stuff compiling (Redhat based OS only)
+  - name: Install development packages for future stuff compiling (Redhat family only)
     sudo: true
     package: name={{ item }} state=present
     with_items:
@@ -54,7 +54,17 @@
       - libmemcached-devel
       - gcc-c++
       - mysql-devel
+      - sqlite-devel
     when: ansible_os_family == "RedHat"
+
+  - name: Install development packages for future stuff compiling (Debian family only)
+    sudo: true
+    package: name={{ item }} state=present
+    with_items:
+      - ruby-dev
+      - mysql-dev
+      - libsqlite3-dev
+    when: ansible_os_family == "Debian"
 
   - name: Install gems
     gem: name={{ item }} state=present

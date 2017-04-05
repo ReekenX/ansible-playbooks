@@ -65,6 +65,7 @@ To run your playbook on all servers:
 | locales.yml     | Install all locales on the server (useful when having multilingual projects)  |
 | apache.yml      | Install apache; configure to support PHP, Ruby and Python projects.           |
 | dotfiles.yml    | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.    |
+| monitoring.yml  | Install packages for networking and cpu usage monitoring.                     |
 | development.yml | Install packages developer will use every day.                                |
 
 # Problems on Fedora

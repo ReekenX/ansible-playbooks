@@ -67,6 +67,7 @@ To run your playbook on all servers:
 | dotfiles.yml    | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.    |
 | monitoring.yml  | Install packages for networking and cpu usage monitoring.                     |
 | development.yml | Install packages developer will use every day.                                |
+| ruby_dev.yml    | Install packages every Ruby developer uses.                                   |
 
 # Problems on Fedora
 

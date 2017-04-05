@@ -9,13 +9,8 @@
     with_items:
       - elinks
       - git
-      - htop
-      - iftop
-      - iotop
-      - nmap
       - ntp
       - tree
-      - whois
       - bc
       - curl
       - sl

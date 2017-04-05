@@ -1,0 +1,14 @@
+---
+#  Install monitoring software
+
+- hosts: all
+  tasks:
+  - name: Install monitoring software
+    sudo: true
+    package: name={{ item }} state=present
+    with_items:
+      - htop
+      - iftop
+      - iotop
+      - nmap
+      - whois

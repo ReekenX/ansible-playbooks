@@ -1,14 +1,14 @@
 ---
-#  Install and configured software for development/developer
+#  Install generic development packages
 
 - hosts: all
   tasks:
-  - name: Install software
+  - name: Install generic development software
     sudo: true
     package: name={{ item }} state=present
     with_items:
-      - elinks
       - git
+      - git-extras
       - ntp
       - tree
       - bc
@@ -19,43 +19,12 @@
       - tmux
       - tig
       - xclip
-      - git-extras
       - filezilla
       - mpv
       - entr
       - clipit
-      - python-pylibmc
-      - python-pip
       - meld
-      - fabric
       - jq
-      - python-virtualenv
-      - pylint
-
-  - name: Install development packages for future stuff compiling (Redhat family only)
-    sudo: true
-    package: name={{ item }} state=present
-    with_items:
-      - libxml2
-      - libxml2-devel
-      - libxslt
-      - libxslt-devel
-      - redhat-rpm-config
-      - python-devel
-      - python3-devel
-      - memcached-devel
-      - libmemcached-devel
-      - gcc-c++
-      - mysql-devel
-      - sqlite-devel
-    when: ansible_os_family == "RedHat"
-
-  - name: Install development packages for future stuff compiling (Debian family only)
-    sudo: true
-    package: name={{ item }} state=present
-    with_items:
-      - mysql-dev
-      - libsqlite3-dev
     when: ansible_os_family == "Debian"
 
   - name: Install gems
@@ -64,17 +33,7 @@
       - git-up
       - compass
       - tmuxinator
-      - bundle
 
   - name: Install livereload
     sudo: true
     shell: pip install livereload
-
-  - name: Install fabric
-    sudo: true
-    shell: pip install fabric
-
-# TODO: phpunit, but not from apt-get but from some source
-# TODO: setup psr2: sudo phpcs --config-set default_standard PSR2
-# TODO: Docker from https://docs.docker.com/engine/installation/linux/ubuntulinux/
-# TODO: Docker compose from https://docs.docker.com/compose/install/

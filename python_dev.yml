@@ -1,14 +1,17 @@
 ---
-#  Install Ruby development packages
+#  Install Python development packages
 
 - hosts: all
   tasks:
-  - name: Install Ruby development software (Debian OS family)
+  - name: Install Python development software (Debian OS family)
     sudo: true
     package: name={{ item }} state=present
     with_items:
-      - ruby
-      - ruby-dev
+      - python-pylibmc
+      - python-pip
+      - fabric
+      - python-virtualenv
+      - pylint
       - libmemcache-dev
       - libmysqlclient-dev
       - libmysqld-dev
@@ -16,16 +19,17 @@
       - libsqlite3-dev
     when: ansible_os_family == "Debian"
 
-  - name: Install Ruby development software (RedHat OS family)
+  - name: Install Python development software (Redhat OS family)
     sudo: true
     package: name={{ item }} state=present
     with_items:
-      - ruby-devel
       - libxml2
       - libxml2-devel
       - libxslt
       - libxslt-devel
       - redhat-rpm-config
+      - python-devel
+      - python3-devel
       - memcached-devel
       - libmemcached-devel
       - gcc-c++
@@ -33,7 +37,10 @@
       - sqlite-devel
     when: ansible_os_family == "RedHat"
 
-  - name: Install popular gems
-    gem: name={{ item }} state=present
-    with_items:
-      - bundle
+  - name: Install livereload
+    sudo: true
+    shell: pip install livereload
+
+  - name: Install fabric
+    sudo: true
+    shell: pip install fabric

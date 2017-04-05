@@ -17,7 +17,6 @@
       - zsh
       - mc
       - tmux
-      - ruby
       - tig
       - xclip
       - git-extras
@@ -37,7 +36,6 @@
     sudo: true
     package: name={{ item }} state=present
     with_items:
-      - ruby-devel
       - libxml2
       - libxml2-devel
       - libxslt
@@ -56,7 +54,6 @@
     sudo: true
     package: name={{ item }} state=present
     with_items:
-      - ruby-dev
       - mysql-dev
       - libsqlite3-dev
     when: ansible_os_family == "Debian"

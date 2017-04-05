@@ -1,0 +1,34 @@
+---
+#  Install ruby development packages
+
+- hosts: all
+  tasks:
+  - name: Install Ruby development software (Debian OS family)
+    sudo: true
+    package: name={{ item }} state=present
+    with_items:
+      - ruby
+      - ruby-dev
+      - libmemcache-dev
+      - libmysqlclient-dev
+      - libmysqld-dev
+      - libsqlite0-dev
+      - libsqlite3-dev
+    when: ansible_os_family == "Debian"
+
+  - name: Install Ruby development software (RedHat OS family)
+    sudo: true
+    package: name={{ item }} state=present
+    with_items:
+      - ruby-devel
+      - libxml2
+      - libxml2-devel
+      - libxslt
+      - libxslt-devel
+      - redhat-rpm-config
+      - memcached-devel
+      - libmemcached-devel
+      - gcc-c++
+      - mysql-devel
+      - sqlite-devel
+    when: ansible_os_family == "RedHat"

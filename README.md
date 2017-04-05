@@ -68,6 +68,7 @@ To run your playbook on all servers:
 | monitoring.yml  | Install packages for networking and cpu usage monitoring.                     |
 | development.yml | Install packages developer will use every day.                                |
 | ruby_dev.yml    | Install packages every Ruby developer uses.                                   |
+| python_dev.yml  | Install packages every Python developer uses.                                 |
 
 # Problems on Fedora
 

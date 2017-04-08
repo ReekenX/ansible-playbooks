@@ -13,10 +13,13 @@
       - python-virtualenv
       - pylint
       - libmemcache-dev
+      - libmemcached-dev
       - libmysqlclient-dev
       - libmysqld-dev
       - libsqlite0-dev
       - libsqlite3-dev
+      - python-dev
+      - python3-dev
     when: ansible_os_family == "Debian"
 
   - name: Install Python development software (Redhat OS family)

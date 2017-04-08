@@ -64,7 +64,7 @@ Picture or didn't happened? Here:
 | python_dev.yml     | Install packages every Python developer uses.                                 |
 | php_dev.yml        | Install packages every PHP developer uses.                                    |
 | docker.yml         | Install and configure Docker. Not finished yet.                               |
-| docker-compose.yml | Install and configure Docker. Not finished yet.                               |
+| docker-compose.yml | Install and configure docker-compose.                                         |
 | pil.yml            | Install and configure Python Imaging library (PIL).                           |
 
 # Contribution

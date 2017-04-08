@@ -1,0 +1,26 @@
+---
+# Install Python Image Library support
+
+- hosts: all
+  tasks:
+  - name: Install Python PIL support
+    sudo: true
+    apt: pkg={{ item }} state=latest update_cache=true
+    ignore_errors: True
+    with_items:
+      - libjpeg8
+      - libjpeg8-dev
+      - libjpeg-dev
+      - libfreetype6
+      - libfreetype6-dev
+      - zlib1g-dev
+      - python-imaging
+      - libjpeg-dev
+  
+  - name: Complete PIL support setup
+    sudo: true
+    shell: "{{ item }}"
+    with_items:
+      - ln -f -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+      - ln -f -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+      - ln -f -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib

@@ -1,0 +1,11 @@
+---
+#  Install JavaScript development packages
+
+- hosts: all
+  tasks:
+  - name: Install JavaScript development software (Debian OS family)
+    sudo: true
+    package: name={{ item }} state=present
+    with_items:
+      - npm
+    when: ansible_os_family == "Debian"

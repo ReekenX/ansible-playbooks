@@ -47,3 +47,7 @@
   - name: Install fabric
     sudo: true
     shell: pip install fabric
+
+  - name: Install Django debug server
+    sudo: true
+    shell: pip install Werkzeug

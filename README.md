@@ -2,61 +2,54 @@
 
 Highly reusable `Ansible` automation playbooks.
 
-`Ansible` is servers/computer automation system which makes saves your day from repeatable tasks. It is useful even if you do not have number of servers/computers to administrate.
+Can be used with servers and personal computers.
 
-This repo gives you ability to reuse already created playbooks, extend those and use for repeatable installation/configuration processes.
+No configuration is needed in order to use this software.
+
+# You know Ansible, right?
+
+`Ansible` is servers/computer automation system which saves your day from repeatable tasks.
+
+It is useful even if you do not have number of servers/computers to administrate.
+
+This repo gives you ability to reuse already created playbooks, extend those and use for repeatable installation and configuration processes.
 
 # How it works?
 
 Mainly you need two things:
 
-- Install `Ansible` on your computer. On servers - this NOT needed.
-- Define your computers/servers once in configuration file.
-- Learn how to run playbooks.
+- Install `Ansible` on your computer. Nothing to install on servers.
+- Learn how to execute playbooks.
 
-All steps are very easy. Read next for tips.
+Read next about those.
 
 # Installing Ansible
 
 You can install it with:
 
-    $ sudo apt-get install ansible  # if you are on Ubuntu
-    $ sudo aptitude install ansible # if you are on Debian
-    $ sudo yum install ansible      # if you are on CentOs
-
-# Configure
-
-Craete `hosts` file with following syntax:
-
-    [all]
-    localhost
-    server.example.org
-    server.example.net
-    example.server.net
-
-Obviously - put all your computers/servers/machines in this one big list.
-
-Keep this list private.
+    $ sudo apt-get install ansible   # if you are on Ubuntu
+    $ sudo aptitude install ansible  # if you are on Debian
+    $ sudo yum install ansible       # if you are on Centos
+    $ sudo dnf install ansible       # if you are on Fedora
 
 # Running playbooks
 
-There are many playbooks in this repo. Playbook is domain specific configuration file which you can run on single/multiple machines.
+There are many playbooks in this repo. Playbook is domain specific configuration file (the one which ends in `.yml` extension) which you can run on single/multiple machines.
 
-Here is how I quickly install all locales on one of my machines:
+Let's say I am starting with new dedicated server. Obviously, I need my personal home files there. Here is what I would run:
 
-    $ ansible-playbook locales.yml -i hosts -l server.example.org,
-
-![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
+    $ ansible-playbook -i 12.34.54.78, dotfiles.yml
 
 Explanation:
 
-- locales.yml - is playbook file to run tasks from.
-- -i hosts - read servers list from file created earlier.
-- -l server.example.org, - apply playbook to single server only (comman is important!)
+- -i IP, - apply playbook to single server only (comman is a must!)
+- dotfiles.yml - playbook to run (all playbooks docummented below)
 
-To run your playbook on all servers:
+# Screenshot
 
-    $ ansible-playbook locales.yml -i hosts
+Picture or didn't happened? Here:
+
+![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
 
 # Playbooks included
 
@@ -74,33 +67,8 @@ To run your playbook on all servers:
 | docker-compose.yml | Install and configure Docker. Not finished yet.                               |
 | pil.yml            | Install and configure Python Imaging library (PIL).                           |
 
-# Problems on Fedora
+# Contribution
 
-If you using Fedora servers, you will need manually install two packages:
+Your feedback or PR's are very welcome! I normally reply in hours, max - next day.
 
-    $ dnf install python
-    $ dnf install python-dnf
-
-And the rest will work just fine.
-
-# Is Ansible > SaltStack?
-
-No, not really.
-
-Previously I have used `SaltStack` for automation but due to many reasons switched to `Ansible`.
-
-I didn't liked very much couple of things in `SaltStack` which made whole deployment-automation unproductive:
-
-- Poor results output.
-- Too complex task dependencies management system.
-- Master-slave communication (yes, I know such thing as `salt-ssh` exists).
-
-My old `SaltStack` configurations are here: https://github.com/ReekenX/salt-configs
-
-# Bugs
-
-This project has no bugs.
-
-But your feedback would be very valuable to me: https://github.com/ReekenX/ansible-playbooks/issues
-
-I normally respond in less than a day. Or just e-mail me (see my profile for e-mail).
+You can comment things on GitHub issue tracker:  https://github.com/ReekenX/ansible-playbooks/issues

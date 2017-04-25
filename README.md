@@ -69,6 +69,7 @@ Picture or didn't happened, right? Here you go:
 | docker.yml         | Install and configure Docker. Not finished yet.                               |
 | docker-compose.yml | Install and configure docker-compose.                                         |
 | pil.yml            | Install and configure Python Imaging library (PIL).                           |
+| apport_errors.yml  | Disable apport which gives modal about GUI errors.                            |
 
 # Contribution
 

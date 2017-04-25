@@ -16,7 +16,7 @@
       - zlib1g-dev
       - python-imaging
       - libjpeg-dev
-  
+
   - name: Complete PIL support setup
     sudo: true
     shell: "{{ item }}"

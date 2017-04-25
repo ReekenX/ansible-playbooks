@@ -1,0 +1,8 @@
+---
+# Disable apport errors reporting
+
+- hosts: all
+  tasks:
+  - name: Disable apport errors reporting
+    sudo: true
+    shell: sed 's/enabled=1/enabled=0/' -i /etc/default/apport

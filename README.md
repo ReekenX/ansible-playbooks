@@ -2,9 +2,9 @@
 
 Highly reusable `Ansible` automation playbooks.
 
-Can be used with servers and personal computers.
+Tested with real servers and personal computers.
 
-No configuration is needed in order to use this software.
+No configuration steps are needed in order to use this software.
 
 # You know Ansible, right?
 
@@ -34,7 +34,9 @@ You can install it with:
 
 # Running playbooks
 
-There are many playbooks in this repo. Playbook is domain specific configuration file (the one which ends in `.yml` extension) which you can run on single/multiple machines.
+There are many playbooks in this repo.
+
+Playbook is domain specific configuration file (the one which ends in `.yml` extension) which you can run on single/multiple machines.
 
 Let's say I am starting with new dedicated server. Obviously, I need my personal home files there. Here is what I would run:
 
@@ -47,7 +49,7 @@ Explanation:
 
 # Screenshot
 
-Picture or didn't happened? Here:
+Picture or didn't happened, right? Here you go:
 
 ![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
 
@@ -70,6 +72,6 @@ Picture or didn't happened? Here:
 
 # Contribution
 
-Your feedback or PR's are very welcome! I normally reply in hours, max - next day.
+I love PR! I normally reply in hours, max - next day.
 
-You can comment things on GitHub issue tracker:  https://github.com/ReekenX/ansible-playbooks/issues
+Leave your feedback, suggestions, PRs:  https://github.com/ReekenX/ansible-playbooks/issues

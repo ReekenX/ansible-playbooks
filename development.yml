@@ -29,11 +29,10 @@
       - silversearcher-ag
     when: ansible_os_family == "Debian"
 
-  - name: Install gems
+  - name: Install SCSS builder and Tmux manager
     gem: name={{ item }} state=present
     sudo: true
     with_items:
-      - git-up
       - compass
       - tmuxinator
 

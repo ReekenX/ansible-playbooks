@@ -2,26 +2,26 @@
 
 Highly reusable `Ansible` automation playbooks.
 
-Tested with real servers and personal computers.
+Tested with production servers and personal laptops / computers.
 
-No configuration steps are needed in order to use this software.
+*No configuration steps are needed* in order to use this software.
 
-# You know Ansible, right?
+# What is Ansible?
 
 `Ansible` is servers/computer automation system which saves your day from repeatable tasks.
 
 It is useful even if you do not have number of servers/computers to administrate.
 
-This repo gives you ability to reuse already created playbooks, extend those and use for repeatable installation and configuration processes.
+This repo gives you ability to reuse already created playbooks, extend and use for repeatable installation and configuration processes.
 
-# How it works?
+# How to start?
 
 Mainly you need two things:
 
 - Install `Ansible` on your computer. Nothing to install on servers.
 - Learn how to execute playbooks.
 
-Read next about those.
+Both explained below.
 
 # Installing Ansible
 

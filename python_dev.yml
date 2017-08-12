@@ -12,7 +12,6 @@
       - fabric
       - python-virtualenv
       - pylint
-      - libmemcache-dev
       - libmemcached-dev
       - libmysqlclient-dev
       - libmysqld-dev

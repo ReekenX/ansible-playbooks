@@ -9,7 +9,6 @@
     with_items:
       - ruby
       - ruby-dev
-      - libmemcache-dev
       - libmysqlclient-dev
       - libmysqld-dev
       - libsqlite0-dev

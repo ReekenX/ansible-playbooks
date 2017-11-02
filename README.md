@@ -55,21 +55,22 @@ Picture or didn't happened, right? Here you go:
 
 # Playbooks included
 
-| File name          | Description                                                                   |
-|--------------------|-------------------------------------------------------------------------------|
-| locales.yml        | Install all locales on the server (useful when having multilingual projects)  |
-| apache.yml         | Install apache; configure to support PHP, Ruby and Python projects.           |
-| dotfiles.yml       | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.    |
-| monitoring.yml     | Install packages for networking and cpu usage monitoring.                     |
-| development.yml    | Install packages developer will use every day.                                |
-| ruby_dev.yml       | Install packages every Ruby developer uses.                                   |
-| python_dev.yml     | Install packages every Python developer uses.                                 |
-| php_dev.yml        | Install packages every PHP developer uses.                                    |
-| javascript_dev.yml | Install packages every JavaScript developer uses. Not finished yet.           |
-| docker.yml         | Install and configure Docker. Not finished yet.                               |
-| docker-compose.yml | Install and configure docker-compose.                                         |
-| pil.yml            | Install and configure Python Imaging library (PIL).                           |
-| apport_errors.yml  | Disable apport which gives modal about GUI errors.                            |
+| File name          | Description                                                                     |
+|--------------------|---------------------------------------------------------------------------------|
+| locales.yml        | Install all locales on the server (useful when having multilingual projects)    |
+| apache.yml         | Install apache; configure to support PHP, Ruby and Python projects.             |
+| dotfiles.yml       | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.      |
+| monitoring.yml     | Install packages for networking and cpu usage monitoring.                       |
+| development.yml    | Install packages developer will use every day.                                  |
+| ruby_dev.yml       | Install packages every Ruby developer uses.                                     |
+| python_dev.yml     | Install packages every Python developer uses.                                   |
+| php_dev.yml        | Install packages every PHP developer uses.                                      |
+| javascript_dev.yml | Install packages every JavaScript developer uses. Not finished yet.             |
+| docker.yml         | Install and configure Docker. Not finished yet.                                 |
+| docker-compose.yml | Install and configure docker-compose.                                           |
+| pil.yml            | Install and configure Python Imaging library (PIL).                             |
+| apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
+| backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |
 
 # Contribution
 

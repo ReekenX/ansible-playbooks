@@ -1,6 +1,0 @@
----
-# Install motd
-
-- name: Install motd
-  sudo: true
-  copy: src=motd dest=/etc/motd

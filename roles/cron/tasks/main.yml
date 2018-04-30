@@ -1,6 +1,0 @@
----
-# Common cron practices
-
-- name: Default failed commands report policy
-  sudo: true
-  lineinfile: dest=/etc/default/cron regexp=^MAILTO= line=MAILTO=webmaster@jarmalavicius.lt

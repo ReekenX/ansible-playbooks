@@ -4,11 +4,17 @@ Highly reusable `Ansible` automation playbooks.
 
 Tested with production servers and personal laptops / computers.
 
-*No configuration steps are needed* in order to use this software.
+*No configuration steps are needed* in order to start using this software.
+
+# In action
+
+I recently got notified from Nagios that one of my servers has security package updates. Here is how I have upgraded and tested it later:
+
+![Upgrading servers with Ansible](https://www.jarmalavicius.lt/assets/ansible_serveriu_atnaujinimui.gif)
 
 # What is Ansible?
 
-`Ansible` is servers/computer automation system which saves your day from repeatable tasks.
+`Ansible` is servers/computers automation system which saves your day from repeatable tasks.
 
 It is useful even if you do not have number of servers/computers to administrate.
 
@@ -16,7 +22,7 @@ This repo gives you ability to reuse already created playbooks, extend and use f
 
 # How to start?
 
-Mainly you need two things:
+You need two things:
 
 - Install `Ansible` on your computer. Nothing to install on servers.
 - Learn how to execute playbooks.
@@ -31,10 +37,11 @@ You can install it with:
     $ sudo aptitude install ansible  # if you are on Debian
     $ sudo yum install ansible       # if you are on Centos
     $ sudo dnf install ansible       # if you are on Fedora
+    $ sudo brew install ansible      # if you are in Starbucks
 
 # Running playbooks
 
-There are many playbooks in this repo.
+There are many playbooks in this repo (see `playbooks/` folder).
 
 Playbook is domain specific configuration file (the one which ends in `.yml` extension) which you can run on single/multiple machines.
 
@@ -46,12 +53,6 @@ Explanation:
 
 - -i IP, - apply playbook to single server only (comman is a must!)
 - dotfiles.yml - playbook to run (all playbooks docummented below)
-
-# Screenshot
-
-Picture or didn't happened, right? Here you go:
-
-![Playing with Ansible playbook on Xterm](screenshots/running_on_single_machine.png?raw=true "Playing with Ansible playbook on Xterm")
 
 # Playbooks included
 
@@ -71,6 +72,7 @@ Picture or didn't happened, right? Here you go:
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |
+| server_upgrade.yml | Upgrade server software.                                                        |
 
 # Contribution
 

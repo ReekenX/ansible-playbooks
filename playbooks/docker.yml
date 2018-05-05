@@ -3,18 +3,17 @@
 
 - hosts: all
   tasks:
-  - name: Install Docker
-    sudo: true
+  - name: Install Docker and dependencies
     shell: "{{ item }}"
     with_items:
-      - apt remove docker docker-engine
-      - apt update
-      - apt install -y linux-image-extra-$(uname -r) linux-image-extra-virtual apt-transport-https ca-certificates curl software-properties-common
+      - apt install -y linux-image-extra-virtual apt-transport-https ca-certificates curl software-properties-common
       - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs)  stable"
+      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu artful stable"
       - apt update
       - apt install -y docker-ce
-      - groupadd docker
-      - sudo usermod -aG docker $USER
-      - echo "You need reboot your system!"
     when: ansible_os_family == "Debian"
+
+  - name: Ensure group "docker" exists
+    group:
+      name: docker
+      state: present

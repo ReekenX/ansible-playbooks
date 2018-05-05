@@ -1,0 +1,8 @@
+# Ansible needs hosts to have Python 2.7 - so without it you can't run playbooks
+
+- hosts: all
+  gather_facts: False
+
+  tasks:
+  - name: Install Python 2.7
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)

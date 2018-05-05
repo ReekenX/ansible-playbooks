@@ -47,12 +47,20 @@ Playbook is domain specific configuration file (the one which ends in `.yml` ext
 
 Let's say I am starting with new dedicated server. Obviously, I need my personal home files there. Here is what I would run:
 
-    $ ansible-playbook -i 12.34.54.78, dotfiles.yml
+    $ ansible-playbook -i 123.123.123.123, dotfiles.yml
 
 Explanation:
 
 - -i IP, - apply playbook to single server only (comman is a must!)
 - dotfiles.yml - playbook to run (all playbooks docummented below)
+
+# Python dependency
+
+As you might already know - Ansible needs Python 2.7. For this reason running playhooks on recent Ubuntu servers won't work.
+
+Run following playbook for the first time and everything will be up and running for your future playbooks:
+
+    $ ansible-playbook -i 123.123.123.123, python.yml
 
 # Playbooks included
 
@@ -76,6 +84,6 @@ Explanation:
 
 # Contribution
 
-I love PR! I normally reply in hours, max - next day.
+I love receiving PRs. File new branch, change / add something and leave me a note.
 
 Leave your feedback, suggestions, PRs:  https://github.com/ReekenX/ansible-playbooks/issues

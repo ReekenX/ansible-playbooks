@@ -29,6 +29,25 @@ You need two things:
 
 Both explained below.
 
+# Ansible playbook example
+
+```
+---
+- hosts: local
+  tasks: 
+    - name: Upgrade all packages to the latest version
+      apt:  
+        update_cache: yes
+        upgrade: yes
+    - name: Remove useless packages from the cache
+      apt:
+        autoclean: yes
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
+...
+```
+
 # Installing Ansible
 
 You can install it with:

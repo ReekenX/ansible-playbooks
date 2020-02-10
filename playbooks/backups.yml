@@ -10,26 +10,14 @@
       with_items:
         - bc
 
-    - name: Install backups software
+    - name: Install backups script
       sudo: true
-      copy: src=private/backups/dropbox-uploader dest=/usr/sbin/dropbox-uploader
+      copy: src=private/backups/{{ ansible_fqdn }} dest=/usr/sbin/make-backups
 
     - name: Make backup script executable
       sudo: true
-      shell: chmod +x /usr/sbin/dropbox-uploader
-
-    - name: Install backups software credentials
-      sudo: true
-      copy: src=private/backups/.dropbox_tokens dest=/root/.dropbox_tokens
-
-    - name: Install backups scripts
-      sudo: true
-      copy: src=private/backups/{{ ansible_fqdn }} dest=/usr/sbin/auto-backups
-
-    - name: Make backup script executable
-      sudo: true
-      shell: chmod +x /usr/sbin/auto-backups
+      shell: chmod +x /usr/sbin/make-backups
 
     - name: Install backups cron entry
       sudo: true
-      cron: name="Automatic backups to Dropbox" minute="0" hour="6" job="bash /usr/sbin/auto-backups | logger"
+      cron: name="Make backups automatically and store to /var/backups" minute="0" hour="4" job="/usr/sbin/make-backups"

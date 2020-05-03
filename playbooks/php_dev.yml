@@ -4,7 +4,6 @@
 - hosts: all
   tasks:
   - name: Install PHP development software (Debian OS family)
-    sudo: true
     package: name={{ item }} state=present
     with_items:
       - php-cli

@@ -4,7 +4,6 @@
 - hosts: all
   tasks:
   - name: Install Python PIL support
-    sudo: true
     apt: pkg={{ item }} state=latest update_cache=true
     ignore_errors: True
     with_items:
@@ -18,7 +17,6 @@
       - libjpeg-dev
 
   - name: Complete PIL support setup
-    sudo: true
     shell: "{{ item }}"
     with_items:
       - ln -f -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib

@@ -4,14 +4,12 @@
 - hosts: all
   tasks:
     - name: Install apache webserver
-      sudo: true
       apt: pkg={{ item }} state=latest update_cache=true
       ignore_errors: True
       with_items:
         - apache2
 
     - name: Install support for PHP, Ruby and Python
-      sudo: true
       apt: pkg={{ item }} state=latest update_cache=true
       ignore_errors: True
       with_items:
@@ -20,7 +18,6 @@
         - libapache2-mod-wsgi
 
     - name: Enable apache2 modules
-      sudo: true
       shell: "{{ item }}"
       with_items:
         - a2enmod rewrite

@@ -4,7 +4,6 @@
 - hosts: all
   tasks:
   - name: Install generic development software
-    sudo: true
     package: name={{ item }} state=present
     with_items:
       - vim
@@ -31,11 +30,9 @@
 
   - name: Install SCSS builder and Tmux manager
     gem: name={{ item }} state=present
-    sudo: true
     with_items:
       - compass
       - tmuxinator
 
   - name: Install livereload
-    sudo: true
     shell: pip install livereload

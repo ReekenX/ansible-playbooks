@@ -4,16 +4,13 @@
 - hosts: all
   tasks:
   - name: Install JavaScript development software (Debian OS family)
-    sudo: true
     package: name={{ item }} state=present
     with_items:
       - npm
     when: ansible_os_family == "Debian"
 
   - name: Upgrade NPM with NPM
-    sudo: true
     shell: npm install npm -g
 
   - name: Make system to register `node` executable
-    sudo: true
     shell: ln -s $(which nodejs) $(which nodejs | sed 's/js$//')

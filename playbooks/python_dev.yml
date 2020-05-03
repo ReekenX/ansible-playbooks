@@ -4,7 +4,6 @@
 - hosts: all
   tasks:
   - name: Install Python development software (Debian OS family)
-    sudo: true
     package: name={{ item }} state=present
     with_items:
       - python-pylibmc
@@ -22,7 +21,6 @@
     when: ansible_os_family == "Debian"
 
   - name: Install Python development software (Redhat OS family)
-    sudo: true
     package: name={{ item }} state=present
     with_items:
       - libxml2
@@ -40,13 +38,10 @@
     when: ansible_os_family == "RedHat"
 
   - name: Install livereload
-    sudo: true
     shell: pip install livereload
 
   - name: Install fabric
-    sudo: true
     shell: pip install fabric
 
   - name: Install Django debug server
-    sudo: true
     shell: pip install Werkzeug

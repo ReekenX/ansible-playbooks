@@ -4,20 +4,16 @@
 - hosts: all
   tasks:
     - name: Install library used to calculate disc space
-      sudo: true
       apt: pkg={{ item }} state=latest update_cache=true
       ignore_errors: True
       with_items:
         - bc
 
     - name: Install backups script
-      sudo: true
       copy: src=private/backups/{{ ansible_fqdn }} dest=/usr/sbin/make-backups
 
     - name: Make backup script executable
-      sudo: true
       shell: chmod +x /usr/sbin/make-backups
 
     - name: Install backups cron entry
-      sudo: true
       cron: name="Make backups automatically and store to /var/backups" minute="0" hour="4" job="/usr/sbin/make-backups"

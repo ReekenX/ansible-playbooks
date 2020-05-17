@@ -34,6 +34,12 @@
         state: present
         home: /home/backup-sync
 
+    - name: Make sure Nagios will be able to check for backups existance
+      user:
+        name: nagios
+        append: yes
+        groups: backup
+
     - name: Allow backup user to download files
       authorized_key:
         user: backup-sync

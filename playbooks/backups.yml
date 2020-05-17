@@ -1,19 +1,41 @@
 ---
-# Install backups (each machine will have it's own backups script)
+# Install backups script
+#
+# Will place cron command to execute /usr/sbin/make-backups every day at 4:00 am
+#
+# Script for /usr/sbin/make-backups will be taken from private/backups/{{ hostname }}
+# You should create backup file yourself.
 
 - hosts: all
   tasks:
     - name: Install library used to calculate disc space
-      apt: pkg={{ item }} state=latest update_cache=true
-      ignore_errors: True
-      with_items:
-        - bc
+      apt:
+        name: bc
+        state: present
 
     - name: Install backups script
       copy: src=private/backups/{{ ansible_fqdn }} dest=/usr/sbin/make-backups
 
     - name: Make backup script executable
-      shell: chmod +x /usr/sbin/make-backups
+      file:
+        path: /usr/sbin/make-backups
+        owner: root
+        group: root
+        mode: '0700'
 
     - name: Install backups cron entry
       cron: name="Make backups automatically and store to /var/backups" minute="0" hour="4" job="/usr/sbin/make-backups"
+
+    - name: Create backup user for backups downloading
+      user:
+        name: backup-sync
+        comment: Backups Downloader
+        group: backup
+        state: present
+        home: /home/backup-sync
+
+    - name: Allow backup user to download files
+      authorized_key:
+        user: backup-sync
+        state: present
+        key: "{{ lookup('file', './private/backups/backup_id_rsa.pub') }}"

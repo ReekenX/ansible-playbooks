@@ -34,9 +34,9 @@ Both explained below.
 ```
 ---
 - hosts: local
-  tasks: 
+  tasks:
     - name: Upgrade all packages to the latest version
-      apt:  
+      apt:
         update_cache: yes
         upgrade: yes
     - name: Remove useless packages from the cache
@@ -100,6 +100,7 @@ Run following playbook for the first time and everything will be up and running 
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |
 | server_upgrade.yml | Upgrade server software.                                                        |
+| nagios-nrpe.yml    | NRPE server configuration, setup and plugins install.                           |
 
 # Contribution
 

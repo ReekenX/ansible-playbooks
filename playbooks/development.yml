@@ -4,35 +4,20 @@
 - hosts: all
   tasks:
   - name: Install generic development software
-    package: name={{ item }} state=present
-    with_items:
-      - vim
-      - git
-      - git-extras
-      - ntp
-      - tree
-      - bc
-      - curl
-      - sl
-      - zsh
-      - mc
-      - tmux
-      - tig
-      - xclip
-      - filezilla
-      - mpv
-      - entr
-      - clipit
-      - meld
-      - jq
-      - silversearcher-ag
+    apt:
+      update_cache: yes
+      pkg:
+        - vim
+        - git
+        - git-extras
+        - tree
+        - bc
+        - curl
+        - zsh
+        - tmux
+        - tmuxinator
+        - tig
+        - jq
+        - silversearcher-ag
+        - ripgrep
     when: ansible_os_family == "Debian"
-
-  - name: Install SCSS builder and Tmux manager
-    gem: name={{ item }} state=present
-    with_items:
-      - compass
-      - tmuxinator
-
-  - name: Install livereload
-    shell: pip install livereload

@@ -4,14 +4,13 @@
 - hosts: all
   tasks:
   - name: Install Ruby development software (Debian OS family)
-    package: name={{ item }} state=present
-    with_items:
-      - ruby
-      - ruby-dev
-      - libmysqlclient-dev
-      - libmysqld-dev
-      - libsqlite0-dev
-      - libsqlite3-dev
+    apt:
+      update_cache: yes
+      pkg:
+        - ruby
+        - ruby-dev
+        - libmysqlclient-dev
+        - libsqlite3-dev
     when: ansible_os_family == "Debian"
 
   - name: Install Ruby development software (RedHat OS family)

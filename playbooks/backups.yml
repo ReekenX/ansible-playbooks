@@ -24,7 +24,7 @@
         mode: '0700'
 
     - name: Install backups cron entry
-      cron: name="Make backups automatically and store to /var/backups" minute="0" hour="4" job="/usr/sbin/make-backups"
+      cron: name="Make backups automatically and store to /var/backups" minute="0" hour="4" job="/usr/bin/nice -n 20 /usr/sbin/make-backups"
 
     - name: Create backup user for backups downloading
       user:

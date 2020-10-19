@@ -12,3 +12,6 @@
 
   - name: Upgrade NPM with NPM
     shell: npm install npm -g
+
+  - name: Install NVM
+    shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash

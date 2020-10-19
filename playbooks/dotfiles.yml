@@ -4,12 +4,15 @@
 - hosts: all
   tasks:
     - name: Install GIT
-      package:
-        name: git
-        state: present
+      apt:
+        update_cache: yes
+        pkg:
+          - git
 
     - name: Clean repo if exists
-      shell: rm -rf ~/.git/ ~/.vim/ ~/.gitconfig.d/ ~/.tmux-plugins .install-dotfiles-home.sh .gitmodules .viminfo
+      file:
+        path: .git
+        state: absent
 
     - name: Install repository
       shell: git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git ~/.git
@@ -22,3 +25,13 @@
 
     - name: Install requirements
       shell: git submodule update --init
+
+    - name: Setup NVim
+      shell: |
+        cd .config
+        ln -s ../.vim nvim
+        cd nvim
+        ln -s ../.vimrc init.vim
+
+    - name: Setup VIM Plugins
+      shell: "vim -c :PlugInstall -c :q -c :q"

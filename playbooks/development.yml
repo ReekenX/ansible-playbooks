@@ -20,4 +20,6 @@
         - jq
         - silversearcher-ag
         - ripgrep
+        - neovim
+        - python3-neovim
     when: ansible_os_family == "Debian"

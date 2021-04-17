@@ -1,7 +1,7 @@
 ---
-# Setup dotfiles for local server user
+# Setup dotfiles
 
-- hosts: all
+- hosts: linux
   tasks:
     - name: Install GIT
       apt:
@@ -9,29 +9,18 @@
         pkg:
           - git
 
-    - name: Clean repo if exists
+- hosts: all
+  tasks:
+    - name: Remove previous dotfiles
       file:
         path: .git
         state: absent
 
     - name: Install repository
-      shell: git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git ~/.git
-
-    - name: Configure repository
-      shell: git config core.bare false
-
-    - name: Expand files
-      shell: git checkout -f
-
-    - name: Install requirements
-      shell: git submodule update --init
-
-    - name: Setup NVim
       shell: |
-        cd .config
-        ln -s ../.vim nvim
-        cd nvim
-        ln -s ../.vimrc init.vim
+        git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git ~/.git
+        git config core.bare false
+        git checkout -f
 
-    - name: Setup VIM Plugins
+    - name: Install VIM Plugins
       shell: "vim -c :PlugInstall -c :q -c :q"

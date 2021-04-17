@@ -23,4 +23,4 @@
         git checkout -f
 
     - name: Install VIM Plugins
-      shell: "vim -c :PlugInstall -c :q -c :q"
+      shell: "vim +slient +VimEnter +PlugInstall +qall"

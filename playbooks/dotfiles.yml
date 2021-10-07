@@ -21,6 +21,3 @@
         git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git ~/.git
         git config core.bare false
         git checkout -f
-
-    - name: Install VIM Plugins
-      shell: "vim +slient +VimEnter +PlugInstall +qall"

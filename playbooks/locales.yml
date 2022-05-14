@@ -2,16 +2,7 @@
 # Install all locales
 - hosts: all
   tasks:
-    - name: Install all locales (Ubuntu only)
-      shell: "{{ item }}"
-      with_items:
-        - rm /var/lib/locales/supported.d/*
-        - ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
-        - locale-gen
-      when: ansible_distribution == "Ubuntu"
-
-    - name: Install all locales (Debian only)
-      apt: pkg={{ item }} state=latest update_cache=true
-      with_items:
-        - locales-all
-      when: ansible_distribution == "Debian"
+  - name: Ensure default locale
+    community.general.locale_gen:
+      name: en_US.UTF-8
+      state: present

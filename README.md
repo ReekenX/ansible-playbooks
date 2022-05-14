@@ -76,12 +76,12 @@ Let's say I am starting with new dedicated server. Obviously, I need my personal
 
 Explanation:
 
-- -i IP, - apply playbook to single server only (comman is a must!)
-- dotfiles.yml - playbook to run (all playbooks docummented below)
+- -i IP, - apply playbook to single server only (comma is a must!)
+- dotfiles.yml - playbook to run (all playbooks documented below)
 
 # Python dependency
 
-As you might already know - Ansible needs Python 2.7. For this reason running playhooks on recent Ubuntu servers won't work.
+As you might already know - Ansible needs Python 2.7. For this reason running playbooks on recent Ubuntu servers won't work.
 
 Run following playbook for the first time and everything will be up and running for your future playbooks:
 
@@ -91,11 +91,12 @@ Run following playbook for the first time and everything will be up and running 
 
 | File name          | Description                                                                     |
 |--------------------|---------------------------------------------------------------------------------|
-| locales.yml        | Install default locales to fix server from warnings                             |
+| locales.yml        | Install default locale to fix terminal from warnings                            |
+| upgrade.yml        | Upgrade server software.                                                        |
 | apache.yml         | Install apache; configure to support PHP, Ruby and Python projects.             |
 | dotfiles.yml       | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.      |
-| monitoring.yml     | Install packages for networking and cpu usage monitoring.                       |
-| development.yml    | Install packages developer will use every day.                                  |
+| monitoring.yml     | Install packages for networking and CPU usage monitoring.                       |
+| development.yml    | Install packages usually used in by engineers (git, rg, neovim, etc.)           |
 | ruby_dev.yml       | Install packages every Ruby developer uses.                                     |
 | python_dev.yml     | Install packages every Python developer uses.                                   |
 | php_dev.yml        | Install packages every PHP developer uses.                                      |
@@ -105,11 +106,10 @@ Run following playbook for the first time and everything will be up and running 
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |
-| upgrade.yml        | Upgrade server software.                                                        |
 | nagios-nrpe.yml    | NRPE server configuration, setup and plugins install.                           |
 
 # Contribution
 
 I love receiving PRs. File new branch, change / add something and leave me a note.
 
-Leave your feedback, suggestions, PRs:  https://github.com/ReekenX/ansible-playbooks/issues
+Leave your feedback, suggestions, PRs: https://github.com/ReekenX/ansible-playbooks/issues

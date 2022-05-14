@@ -7,19 +7,8 @@
     apt:
       update_cache: yes
       pkg:
-        - vim
         - git
-        - git-extras
         - tree
-        - bc
         - curl
-        - zsh
-        - tmux
-        - tmuxinator
-        - tig
-        - jq
-        - silversearcher-ag
         - ripgrep
         - neovim
-        - python3-neovim
-    when: ansible_os_family == "Debian"

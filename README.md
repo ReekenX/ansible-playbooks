@@ -58,6 +58,12 @@ You can install it with:
     $ sudo dnf install ansible       # if you are on Fedora
     $ sudo brew install ansible      # if you are in Starbucks
 
+# Running with Ansible
+
+Check uptime for all servers you have:
+
+    ansible all -m command -a uptime
+
 # Running playbooks
 
 There are many playbooks in this repo (see `playbooks/` folder).
@@ -85,7 +91,7 @@ Run following playbook for the first time and everything will be up and running 
 
 | File name          | Description                                                                     |
 |--------------------|---------------------------------------------------------------------------------|
-| locales.yml        | Install all locales on the server (useful when having multilingual projects)    |
+| locales.yml        | Install default locales to fix server from warnings                             |
 | apache.yml         | Install apache; configure to support PHP, Ruby and Python projects.             |
 | dotfiles.yml       | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.      |
 | monitoring.yml     | Install packages for networking and cpu usage monitoring.                       |
@@ -99,7 +105,7 @@ Run following playbook for the first time and everything will be up and running 
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |
-| server_upgrade.yml | Upgrade server software.                                                        |
+| upgrade.yml        | Upgrade server software.                                                        |
 | nagios-nrpe.yml    | NRPE server configuration, setup and plugins install.                           |
 
 # Contribution

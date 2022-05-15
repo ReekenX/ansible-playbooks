@@ -3,17 +3,40 @@
 
 - hosts: all
   tasks:
-  - name: Install Docker and dependencies
-    shell: "{{ item }}"
-    with_items:
-      - apt install -y linux-image-extra-virtual apt-transport-https ca-certificates curl software-properties-common
-      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu artful stable"
-      - apt update
-      - apt install -y docker-ce
-    when: ansible_os_family == "Debian"
+  - name: Ensure old Docker package is not installed
+    apt:
+      update_cache: yes
+      state: absent
+      purge: yes
+      pkg:
+        - docker
+        - docker-engine 
+        - docker.io 
+        - containerd 
+        - runc
 
-  - name: Ensure group "docker" exists
-    group:
-      name: docker
-      state: present
+  - name: Install Docker must have packages
+    apt:
+      pkg:
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
+
+  - name: Install Docker GPG key
+    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
+
+  - name: Install Docker Stable Repository
+    shell: 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+
+  - name: Install Docker Engine
+    apt:
+      update_cache: yes
+      pkg:
+        - docker-ce 
+        - docker-ce-cli 
+        - containerd.io 
+        - docker-compose-plugin
+
+  - name: Verify Docker
+    shell: "docker run hello-world"

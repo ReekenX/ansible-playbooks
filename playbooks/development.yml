@@ -12,3 +12,8 @@
         - curl
         - ripgrep
         - neovim
+
+  - name: Copy Bash aliases
+    ansible.builtin.copy:
+      src: ../private/files/.bash_aliases
+      dest: ~/.bash_aliases

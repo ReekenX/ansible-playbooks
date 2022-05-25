@@ -12,6 +12,7 @@
         - curl
         - ripgrep
         - neovim
+        - fzy
 
   - name: Copy Bash aliases
     ansible.builtin.copy:

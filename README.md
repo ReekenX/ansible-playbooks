@@ -64,6 +64,10 @@ Check uptime for all servers you have:
 
     ansible all -m command -a uptime
 
+Limit your command to only some hosts:
+
+    ansible-playbook playbooks/docker.yml --limit "server.example.org"
+
 # Running playbooks
 
 There are many playbooks in this repo (see `playbooks/` folder).
@@ -101,8 +105,7 @@ Run following playbook for the first time and everything will be up and running 
 | python_dev.yml     | Install packages every Python developer uses.                                   |
 | php_dev.yml        | Install packages every PHP developer uses.                                      |
 | javascript_dev.yml | Install packages every JavaScript developer uses. Not finished yet.             |
-| docker.yml         | Install and configure Docker. Not finished yet.                                 |
-| docker-compose.yml | Install and configure docker-compose.                                           |
+| docker.yml         | Install and configure Docker.                                                   |
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |

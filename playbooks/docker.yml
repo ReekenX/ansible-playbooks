@@ -1,42 +1,94 @@
 ---
-#  Install Docker
+#  Install Docker Engine from official Docker repository
+#  Based on: https://docs.docker.com/engine/install/ubuntu/
 
 - hosts: all
+  become: yes
   tasks:
-  - name: Ensure old Docker package is not installed
+  - name: Ensure old Docker packages are removed
     apt:
       update_cache: yes
       state: absent
       purge: yes
       pkg:
         - docker
-        - docker-engine 
-        - docker.io 
-        - containerd 
+        - docker-engine
+        - docker.io
+        - docker-compose
+        - docker-compose-v2
+        - docker-doc
+        - podman-docker
+        - containerd
         - runc
 
-  - name: Install Docker must have packages
+  - name: Install Docker prerequisites
     apt:
       pkg:
         - ca-certificates
         - curl
-        - gnupg
-        - lsb-release
 
-  - name: Install Docker GPG key
-    shell: "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
+  - name: Create keyrings directory
+    ansible.builtin.file:
+      path: /etc/apt/keyrings
+      state: directory
+      mode: '0755'
 
-  - name: Install Docker Stable Repository
-    shell: 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+  - name: Download Docker GPG key
+    ansible.builtin.get_url:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      dest: /etc/apt/keyrings/docker.asc
+      mode: '0644'
+
+  - name: Make Docker GPG key readable
+    ansible.builtin.file:
+      path: /etc/apt/keyrings/docker.asc
+      mode: '0644'
+
+  - name: Get Ubuntu codename
+    ansible.builtin.shell:
+      cmd: . /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}"
+    register: ubuntu_codename
+    changed_when: false
+
+  - name: Add Docker repository (DEB822 format)
+    ansible.builtin.copy:
+      dest: /etc/apt/sources.list.d/docker.sources
+      content: |
+        Types: deb
+        URIs: https://download.docker.com/linux/ubuntu
+        Suites: {{ ubuntu_codename.stdout }}
+        Components: stable
+        Signed-By: /etc/apt/keyrings/docker.asc
+      mode: '0644'
 
   - name: Install Docker Engine
     apt:
       update_cache: yes
       pkg:
-        - docker-ce 
-        - docker-ce-cli 
-        - containerd.io 
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
         - docker-compose-plugin
 
-  - name: Verify Docker
-    shell: "docker run hello-world"
+  - name: Ensure Docker service is started and enabled
+    ansible.builtin.systemd:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Add current user to docker group
+    ansible.builtin.user:
+      name: "{{ ansible_user }}"
+      groups: docker
+      append: yes
+    when: ansible_user is defined
+
+  - name: Verify Docker installation
+    ansible.builtin.command: docker --version
+    register: docker_version
+    changed_when: false
+
+  - name: Display Docker version
+    ansible.builtin.debug:
+      msg: "Docker installed successfully: {{ docker_version.stdout }}"

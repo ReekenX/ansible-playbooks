@@ -1,0 +1,76 @@
+---
+# Install and configure UFW (Uncomplicated Firewall) for web servers
+# Configured for Docker compatibility with HTTP/HTTPS/SSH access
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install UFW
+    apt:
+      update_cache: yes
+      pkg:
+        - ufw
+
+  - name: Configure UFW to allow Docker forwarding
+    ansible.builtin.lineinfile:
+      path: /etc/default/ufw
+      regexp: '^DEFAULT_FORWARD_POLICY='
+      line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+      backup: yes
+    notify: reload ufw
+
+  - name: Set UFW default policies
+    community.general.ufw:
+      direction: "{{ item.direction }}"
+      policy: "{{ item.policy }}"
+    loop:
+      - { direction: 'incoming', policy: 'deny' }
+      - { direction: 'outgoing', policy: 'allow' }
+      - { direction: 'routed', policy: 'allow' }
+
+  - name: Allow SSH with rate limiting
+    community.general.ufw:
+      rule: limit
+      port: '22'
+      proto: tcp
+      comment: 'SSH with rate limiting'
+
+  - name: Allow HTTP traffic
+    community.general.ufw:
+      rule: allow
+      port: '80'
+      proto: tcp
+      comment: 'HTTP'
+
+  - name: Allow HTTPS traffic
+    community.general.ufw:
+      rule: allow
+      port: '443'
+      proto: tcp
+      comment: 'HTTPS'
+
+  - name: Enable UFW
+    community.general.ufw:
+      state: enabled
+
+  - name: Ensure UFW service is started and enabled
+    ansible.builtin.systemd:
+      name: ufw
+      state: started
+      enabled: yes
+
+  - name: Get UFW status
+    ansible.builtin.command: ufw status verbose
+    register: ufw_status
+    changed_when: false
+
+  - name: Display UFW status
+    ansible.builtin.debug:
+      msg: "{{ ufw_status.stdout_lines }}"
+
+  handlers:
+  - name: reload ufw
+    ansible.builtin.systemd:
+      name: ufw
+      state: reloaded
+    when: ansible_facts.services['ufw.service'] is defined and ansible_facts.services['ufw.service'].state == 'running'

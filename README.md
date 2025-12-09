@@ -107,6 +107,7 @@ Run following playbook for the first time and everything will be up and running 
 | php_dev.yml        | Install packages every PHP developer uses.                                      |
 | javascript_dev.yml | Install packages every JavaScript developer uses. Not finished yet.             |
 | docker.yml         | Install Docker Engine from official repository with compose and buildx plugins. |
+| firewall.yml       | Install and configure UFW firewall with Docker compatibility. HTTP/HTTPS/SSH rate-limited access. |
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily cron-based backups to /var/backups. Includes custom conf for every machine. |

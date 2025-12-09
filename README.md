@@ -76,7 +76,7 @@ Playbook is domain specific configuration file (the one which ends in `.yml` ext
 
 Let's say I am starting with new dedicated server. Obviously, I need my personal home files there. Here is what I would run:
 
-    $ ansible-playbook -i 123.123.123.123, dotfiles.yml
+    $ ansible-playbook -i 123.123.123.123, playbooks/dotfiles.yml
 
 Explanation:
 
@@ -89,14 +89,15 @@ As you might already know - Ansible needs Python 2.7. For this reason running pl
 
 Run following playbook for the first time and everything will be up and running for your future playbooks:
 
-    $ ansible-playbook -i 123.123.123.123, python.yml
+    $ ansible-playbook -i 123.123.123.123, playbooks/python.yml
 
 # Playbooks included
 
 | File name          | Description                                                                     |
 |--------------------|---------------------------------------------------------------------------------|
+| python.yml         | Install Python 2.7 for Ansible compatibility on recent Ubuntu servers.         |
 | locales.yml        | Install default locale to fix terminal from warnings                            |
-| upgrade.yml        | Upgrade server software.                                                        |
+| upgrade.yml        | Upgrade server with dist-upgrade, disk space checks, kernel cleanup, and reboot detection. |
 | apache.yml         | Install apache; configure to support PHP, Ruby and Python projects.             |
 | dotfiles.yml       | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.      |
 | monitoring.yml     | Install packages for networking and CPU usage monitoring.                       |
@@ -105,10 +106,10 @@ Run following playbook for the first time and everything will be up and running 
 | python_dev.yml     | Install packages every Python developer uses.                                   |
 | php_dev.yml        | Install packages every PHP developer uses.                                      |
 | javascript_dev.yml | Install packages every JavaScript developer uses. Not finished yet.             |
-| docker.yml         | Install and configure Docker.                                                   |
+| docker.yml         | Install Docker Engine from official repository with compose and buildx plugins. |
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
-| backups.yml        | Daily backups to Dropbox automatically. Includes custom conf for every machine. |
+| backups.yml        | Daily cron-based backups to /var/backups. Includes custom conf for every machine. |
 | nagios-nrpe.yml    | NRPE server configuration, setup and plugins install.                           |
 
 # Contribution

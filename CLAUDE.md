@@ -103,6 +103,7 @@ ansible-playbook -i 123.123.123.123, playbooks/python.yml
 - `apache.yml` - Apache with PHP, Ruby, Python support
 - `monitoring.yml` - Network and CPU monitoring tools
 - `nagios-nrpe.yml` - NRPE server with plugins
+- `firewall.yml` - UFW firewall with Docker compatibility, rate-limited SSH/HTTP/HTTPS access
 
 **User Configuration:**
 - `dotfiles.yml` - Install dotfiles from ReekenX/dotfiles repository

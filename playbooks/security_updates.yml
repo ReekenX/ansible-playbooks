@@ -1,0 +1,60 @@
+---
+# Configure automatic security updates using unattended-upgrades
+# Safe for production - only applies security patches automatically
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install unattended-upgrades package
+    apt:
+      update_cache: yes
+      pkg:
+        - unattended-upgrades
+        - apt-listchanges
+
+  - name: Enable automatic security updates
+    ansible.builtin.copy:
+      dest: /etc/apt/apt.conf.d/20auto-upgrades
+      content: |
+        APT::Periodic::Update-Package-Lists "1";
+        APT::Periodic::Unattended-Upgrade "1";
+        APT::Periodic::Download-Upgradeable-Packages "1";
+        APT::Periodic::AutocleanInterval "7";
+      mode: '0644'
+
+  - name: Configure unattended-upgrades for security only
+    ansible.builtin.copy:
+      dest: /etc/apt/apt.conf.d/50unattended-upgrades
+      content: |
+        Unattended-Upgrade::Allowed-Origins {
+            "${distro_id}:${distro_codename}-security";
+        };
+        Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+        Unattended-Upgrade::MinimalSteps "true";
+        Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+        Unattended-Upgrade::Remove-Unused-Dependencies "true";
+        Unattended-Upgrade::Automatic-Reboot "false";
+        Unattended-Upgrade::Automatic-Reboot-Time "03:00";
+        Unattended-Upgrade::Mail "root";
+        Unattended-Upgrade::MailReport "on-change";
+      mode: '0644'
+
+  - name: Start and enable unattended-upgrades service
+    ansible.builtin.systemd:
+      name: unattended-upgrades
+      state: started
+      enabled: yes
+
+  - name: Display unattended-upgrades status
+    ansible.builtin.command: systemctl status unattended-upgrades --no-pager
+    register: service_status
+    changed_when: false
+    failed_when: false
+
+  - name: Show configuration result
+    ansible.builtin.debug:
+      msg:
+        - "Automatic security updates are now enabled"
+        - "Updates will be checked daily"
+        - "Only security patches will be installed automatically"
+        - "System will NOT auto-reboot (set Automatic-Reboot to 'true' to enable)"

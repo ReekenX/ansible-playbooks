@@ -1,19 +1,71 @@
 ---
 - hosts: all
-  tasks:
-  - name: Update APT package cache
-    apt: update_cache=yes cache_valid_time=600
+  become: yes
 
-  - name: Upgrade APT to the latest packages
-    apt: upgrade=dist
-    register: apt_result
+  tasks:
+  - name: Check available disk space
+    shell: df / --output=pcent | tail -1 | tr -d ' %'
+    register: disk_usage
+    changed_when: false
+    failed_when: disk_usage.stdout | int > 90
+    tags: [preflight]
+
+  - name: Update APT package cache
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+    tags: [cache]
+
+  - name: Perform dist upgrade
+    apt:
+      upgrade: dist
+      update_cache: yes
+      autoclean: yes
+    register: upgrade_result
+    tags: [upgrade]
 
   - name: Autoremove unused packages
-    command: apt -y autoremove
-    register: apt_result
-    changed_when: "'packages will be REMOVED' in apt_result.stdout"
+    apt:
+      autoremove: yes
+      purge: yes
+    register: autoremove_result
+    tags: [cleanup]
+
+  - name: Find residual kernel packages
+    shell: |
+      set -o pipefail
+      dpkg -l | grep "^rc\s*linux-image-" | awk '{print $2}' || true
+    args:
+      executable: /bin/bash
+    register: residual_kernels
+    changed_when: false
+    tags: [cleanup, kernels]
 
   - name: Purge residual kernel packages
-    shell: apt remove -y --purge $(dpkg -l | grep "^rc\s*linux-image-" | awk '{print $2}' | tr '\n' ' ')
-    register: apt_result
-    changed_when: "'packages will be REMOVED' in apt_result.stdout"
+    apt:
+      name: "{{ residual_kernels.stdout_lines }}"
+      state: absent
+      purge: yes
+    when: residual_kernels.stdout_lines | length > 0
+    register: kernel_purge_result
+    tags: [cleanup, kernels]
+
+  - name: Check if reboot is required
+    stat:
+      path: /var/run/reboot-required
+    register: reboot_required
+    tags: [always]
+
+  - name: Build upgrade summary
+    set_fact:
+      upgrade_summary:
+        packages_upgraded: "{{ upgrade_result.changed }}"
+        autoremove_executed: "{{ autoremove_result.changed }}"
+        kernels_purged: "{{ kernel_purge_result.changed | default(false) }}"
+        reboot_required: "{{ reboot_required.stat.exists }}"
+    tags: [always]
+
+  - name: Display upgrade summary
+    debug:
+      var: upgrade_summary
+    tags: [always]

@@ -6,12 +6,6 @@ Tested with production servers and personal laptops / computers.
 
 *No configuration steps are needed* in order to start using this software.
 
-# In action
-
-I recently got notified from Nagios that one of my servers has security package updates. Here is how I have upgraded and tested it later:
-
-![Upgrading servers with Ansible](https://www.jarmalavicius.lt/assets/ansible_serveriu_atnaujinimui.gif)
-
 # What is Ansible?
 
 `Ansible` is servers/computers automation system which saves your day from repeatable tasks.
@@ -29,25 +23,6 @@ You need two things:
 
 Both explained below.
 
-# Ansible playbook example
-
-```
----
-- hosts: local
-  tasks:
-    - name: Upgrade all packages to the latest version
-      apt:
-        update_cache: yes
-        upgrade: yes
-    - name: Remove useless packages from the cache
-      apt:
-        autoclean: yes
-    - name: Remove dependencies that are no longer required
-      apt:
-        autoremove: yes
-...
-```
-
 # Installing Ansible
 
 You can install it with:
@@ -56,9 +31,17 @@ You can install it with:
     $ sudo aptitude install ansible  # if you are on Debian
     $ sudo yum install ansible       # if you are on Centos
     $ sudo dnf install ansible       # if you are on Fedora
-    $ sudo brew install ansible      # if you are in Starbucks
+    $ sudo brew install ansible      # if you are rich
 
 # Running with Ansible
+
+Assuming you have servers listed:
+
+```bash
+$ cat private/hosts.ini
+server.one.com ansible_host=123.123.123.123
+server.two.com ansible_user=deployment
+```
 
 Check uptime for all servers you have:
 
@@ -66,30 +49,7 @@ Check uptime for all servers you have:
 
 Limit your command to only some hosts:
 
-    ansible-playbook playbooks/docker.yml --limit "server.example.org"
-
-# Running playbooks
-
-There are many playbooks in this repo (see `playbooks/` folder).
-
-Playbook is domain specific configuration file (the one which ends in `.yml` extension) which you can run on single/multiple machines.
-
-Let's say I am starting with new dedicated server. Obviously, I need my personal home files there. Here is what I would run:
-
-    $ ansible-playbook -i 123.123.123.123, playbooks/dotfiles.yml
-
-Explanation:
-
-- -i IP, - apply playbook to single server only (comma is a must!)
-- dotfiles.yml - playbook to run (all playbooks documented below)
-
-# Python dependency
-
-As you might already know - Ansible needs Python 2.7. For this reason running playbooks on recent Ubuntu servers won't work.
-
-Run following playbook for the first time and everything will be up and running for your future playbooks:
-
-    $ ansible-playbook -i 123.123.123.123, playbooks/python.yml
+    ansible-playbook playbooks/docker.yml --limit "server.one.com"
 
 # Playbooks included
 

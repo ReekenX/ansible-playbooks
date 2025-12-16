@@ -2,10 +2,15 @@
 #  Install generic development packages
 
 - hosts: all
+  become: yes
   tasks:
-  - name: Install generic development software
-    apt:
+  - name: Update APT package cache
+    ansible.builtin.apt:
       update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Install generic development tools
+    ansible.builtin.apt:
       pkg:
         - git
         - tree
@@ -14,7 +19,32 @@
         - neovim
         - fzy
 
+  - name: Check if private bash aliases exist
+    ansible.builtin.stat:
+      path: "{{ playbook_dir }}/../private/files/.bash_aliases"
+    register: bash_aliases_file
+    delegate_to: localhost
+    become: no
+
   - name: Copy Bash aliases
     ansible.builtin.copy:
-      src: ../private/files/.bash_aliases
-      dest: ~/.bash_aliases
+      src: "{{ playbook_dir }}/../private/files/.bash_aliases"
+      dest: "{{ ansible_env.HOME }}/.bash_aliases"
+      mode: '0644'
+    become: no
+    when: bash_aliases_file.stat.exists
+
+  - name: Verify installed packages
+    ansible.builtin.shell: |
+      set -o pipefail
+      for pkg in git tree curl ripgrep neovim fzy; do
+        dpkg -s "$pkg" 2>/dev/null | grep -q "Status: install ok installed" && echo "$pkg: installed"
+      done
+    args:
+      executable: /bin/bash
+    register: installed_packages
+    changed_when: false
+
+  - name: Display installation summary
+    ansible.builtin.debug:
+      msg: "{{ installed_packages.stdout_lines }}"

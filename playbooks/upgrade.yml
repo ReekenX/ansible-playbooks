@@ -8,13 +8,11 @@
     register: disk_usage
     changed_when: false
     failed_when: disk_usage.stdout | int > 90
-    tags: [preflight]
 
   - name: Update APT package cache
     apt:
       update_cache: yes
       cache_valid_time: 3600
-    tags: [cache]
 
   - name: Perform dist upgrade
     apt:
@@ -22,14 +20,12 @@
       update_cache: yes
       autoclean: yes
     register: upgrade_result
-    tags: [upgrade]
 
   - name: Autoremove unused packages
     apt:
       autoremove: yes
       purge: yes
     register: autoremove_result
-    tags: [cleanup]
 
   - name: Find residual kernel packages
     shell: |
@@ -39,7 +35,6 @@
       executable: /bin/bash
     register: residual_kernels
     changed_when: false
-    tags: [cleanup, kernels]
 
   - name: Purge residual kernel packages
     apt:
@@ -48,13 +43,11 @@
       purge: yes
     when: residual_kernels.stdout_lines | length > 0
     register: kernel_purge_result
-    tags: [cleanup, kernels]
 
   - name: Check if reboot is required
     stat:
       path: /var/run/reboot-required
     register: reboot_required
-    tags: [always]
 
   - name: Build upgrade summary
     set_fact:
@@ -63,9 +56,7 @@
         autoremove_executed: "{{ autoremove_result.changed }}"
         kernels_purged: "{{ kernel_purge_result.changed | default(false) }}"
         reboot_required: "{{ reboot_required.stat.exists }}"
-    tags: [always]
 
   - name: Display upgrade summary
     debug:
       var: upgrade_summary
-    tags: [always]

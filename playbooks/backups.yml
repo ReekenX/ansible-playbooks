@@ -1,47 +1,30 @@
 ---
-# Install backups script
+# Database backup script
 #
-# Will place cron command to execute /usr/sbin/make-backups every day at 4:00 am
+# Backs up databases defined in host_vars to /var/backups with best compression.
+# Runs daily at 4:00 AM via cron.
 #
-# Script for /usr/sbin/make-backups will be taken from private/backups/{{ hostname }}
-# You should create backup file yourself.
+# Configure databases in host_vars/<hostname>.yml:
+#
+#   backup_databases:
+#     - name: myapp
+#       cmd: pg_dump -U postgres myapp
+#     - name: shop
+#       cmd: docker exec -i mysql_container mysqldump -uroot shop
 
 - hosts: all
   tasks:
-    - name: Install library used to calculate disc space
-      apt:
-        name: bc
-        state: present
-
-    - name: Install backups script
-      copy: src=private/backups/{{ ansible_fqdn }} dest=/usr/sbin/make-backups
-
-    - name: Make backup script executable
-      file:
-        path: /usr/sbin/make-backups
+    - name: Install backup script from template
+      ansible.builtin.template:
+        src: templates/backup-databases.sh.j2
+        dest: /usr/sbin/make-backups
         owner: root
         group: root
         mode: '0700'
 
     - name: Install backups cron entry
-      cron: name="Make backups automatically and store to /var/backups" minute="0" hour="4" job="/usr/bin/nice -n 20 /usr/sbin/make-backups"
-
-    - name: Create backup user for backups downloading
-      user:
-        name: backup-sync
-        comment: Backups Downloader
-        group: backup
-        state: present
-        home: /home/backup-sync
-
-    - name: Make sure Nagios will be able to check for backups existance
-      user:
-        name: nagios
-        append: yes
-        groups: backup
-
-    - name: Allow backup user to download files
-      authorized_key:
-        user: backup-sync
-        state: present
-        key: "{{ lookup('file', './private/backups/backup_id_rsa.pub') }}"
+      cron:
+        name: "Database backups to /var/backups"
+        minute: "0"
+        hour: "4"
+        job: "/usr/bin/nice -n 20 /usr/sbin/make-backups"

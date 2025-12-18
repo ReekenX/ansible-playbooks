@@ -11,39 +11,39 @@
 
     - name: Check if dotfiles repository exists
       stat:
-        path: "{{ ansible_env.HOME }}/.git"
+        path: "{{ ansible_facts.env.HOME }}/.git"
       register: dotfiles_git
 
     - name: Backup existing dotfiles if present
-      command: "git -C {{ ansible_env.HOME }} stash"
+      command: "git -C {{ ansible_facts.env.HOME }} stash"
       when: dotfiles_git.stat.exists
       ignore_errors: yes
       changed_when: false
 
     - name: Remove previous dotfiles directory if not a repository
       file:
-        path: "{{ ansible_env.HOME }}/.git"
+        path: "{{ ansible_facts.env.HOME }}/.git"
         state: absent
       when: dotfiles_git.stat.exists and not dotfiles_git.stat.isdir
 
     - name: Clone dotfiles repository
       shell: |
-        git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git {{ ansible_env.HOME }}/.git
+        git clone --bare --depth 1 https://github.com/ReekenX/dotfiles.git {{ ansible_facts.env.HOME }}/.git
       args:
-        creates: "{{ ansible_env.HOME }}/.git/config"
+        creates: "{{ ansible_facts.env.HOME }}/.git/config"
 
     - name: Configure repository as non-bare
-      command: "git -C {{ ansible_env.HOME }} config core.bare false"
+      command: "git -C {{ ansible_facts.env.HOME }} config core.bare false"
       when: not dotfiles_git.stat.exists
       changed_when: true
 
     - name: Checkout dotfiles (preserve local changes)
-      command: "git -C {{ ansible_env.HOME }} checkout"
+      command: "git -C {{ ansible_facts.env.HOME }} checkout"
       register: checkout_result
       failed_when: false
       changed_when: checkout_result.rc == 0
 
     - name: Force checkout if normal checkout failed
-      command: "git -C {{ ansible_env.HOME }} checkout -f"
+      command: "git -C {{ ansible_facts.env.HOME }} checkout -f"
       when: checkout_result.rc != 0
       changed_when: true

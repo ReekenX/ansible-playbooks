@@ -13,7 +13,7 @@
         - apt-listchanges
 
   - name: Enable automatic security updates
-    ansible.builtin.copy:
+    copy:
       dest: /etc/apt/apt.conf.d/20auto-upgrades
       content: |
         APT::Periodic::Update-Package-Lists "1";
@@ -23,7 +23,7 @@
       mode: '0644'
 
   - name: Configure unattended-upgrades for security only
-    ansible.builtin.copy:
+    copy:
       dest: /etc/apt/apt.conf.d/50unattended-upgrades
       content: |
         Unattended-Upgrade::Allowed-Origins {
@@ -40,19 +40,19 @@
       mode: '0644'
 
   - name: Start and enable unattended-upgrades service
-    ansible.builtin.systemd:
+    systemd:
       name: unattended-upgrades
       state: started
       enabled: yes
 
   - name: Display unattended-upgrades status
-    ansible.builtin.command: systemctl status unattended-upgrades --no-pager
+    command: systemctl status unattended-upgrades --no-pager
     register: service_status
     changed_when: false
     failed_when: false
 
   - name: Show configuration result
-    ansible.builtin.debug:
+    debug:
       msg:
         - "Automatic security updates are now enabled"
         - "Updates will be checked daily"

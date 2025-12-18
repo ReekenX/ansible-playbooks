@@ -12,7 +12,7 @@
         - ufw
 
   - name: Configure UFW to allow Docker forwarding
-    ansible.builtin.lineinfile:
+    lineinfile:
       path: /etc/default/ufw
       regexp: '^DEFAULT_FORWARD_POLICY='
       line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
@@ -54,23 +54,23 @@
       state: enabled
 
   - name: Ensure UFW service is started and enabled
-    ansible.builtin.systemd:
+    systemd:
       name: ufw
       state: started
       enabled: yes
 
   - name: Get UFW status
-    ansible.builtin.command: ufw status verbose
+    command: ufw status verbose
     register: ufw_status
     changed_when: false
 
   - name: Display UFW status
-    ansible.builtin.debug:
+    debug:
       msg: "{{ ufw_status.stdout_lines }}"
 
   handlers:
   - name: reload ufw
-    ansible.builtin.systemd:
+    systemd:
       name: ufw
       state: reloaded
     when: ansible_facts.services['ufw.service'] is defined and ansible_facts.services['ufw.service'].state == 'running'

@@ -28,30 +28,30 @@
         - curl
 
   - name: Create keyrings directory
-    ansible.builtin.file:
+    file:
       path: /etc/apt/keyrings
       state: directory
       mode: '0755'
 
   - name: Download Docker GPG key
-    ansible.builtin.get_url:
+    get_url:
       url: https://download.docker.com/linux/ubuntu/gpg
       dest: /etc/apt/keyrings/docker.asc
       mode: '0644'
 
   - name: Make Docker GPG key readable
-    ansible.builtin.file:
+    file:
       path: /etc/apt/keyrings/docker.asc
       mode: '0644'
 
   - name: Get Ubuntu codename
-    ansible.builtin.shell:
+    shell:
       cmd: . /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}"
     register: ubuntu_codename
     changed_when: false
 
   - name: Add Docker repository (DEB822 format)
-    ansible.builtin.copy:
+    copy:
       dest: /etc/apt/sources.list.d/docker.sources
       content: |
         Types: deb
@@ -72,23 +72,23 @@
         - docker-compose-plugin
 
   - name: Ensure Docker service is started and enabled
-    ansible.builtin.systemd:
+    systemd:
       name: docker
       state: started
       enabled: yes
 
   - name: Add current user to docker group
-    ansible.builtin.user:
+    user:
       name: "{{ ansible_user }}"
       groups: docker
       append: yes
     when: ansible_user is defined
 
   - name: Verify Docker installation
-    ansible.builtin.command: docker --version
+    command: docker --version
     register: docker_version
     changed_when: false
 
   - name: Display Docker version
-    ansible.builtin.debug:
+    debug:
       msg: "Docker installed successfully: {{ docker_version.stdout }}"

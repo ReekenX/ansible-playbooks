@@ -1,0 +1,75 @@
+---
+# Cleanup noisy Ubuntu MOTD (Message of the Day)
+# Keeps only system information, removes ads, ESM messages, and help links
+# Adds figlet banner and needrestart notifications
+#
+# Configure banner in host_vars/<hostname>.yml:
+#
+#   motd_banner: "weld.lt server"
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install MOTD enhancement packages
+      apt:
+        pkg:
+          - figlet
+          - needrestart
+
+    - name: Create figlet banner MOTD script
+      copy:
+        dest: /etc/update-motd.d/05-banner
+        mode: "0755"
+        content: |
+          #!/bin/bash
+          figlet "{{ motd_banner }}"
+
+    - name: Create needrestart MOTD script
+      copy:
+        dest: /etc/update-motd.d/98-needrestart
+        mode: "0755"
+        content: |
+          #!/bin/bash
+          OUTPUT=$(needrestart -b 2>/dev/null)
+          SERVICES=$(echo "$OUTPUT" | grep -c "^NEEDRESTART-SVC:")
+          KERNEL=$(echo "$OUTPUT" | grep "^NEEDRESTART-KSTA:" | cut -d: -f2 | tr -d ' ')
+
+          if [ "$SERVICES" -gt 0 ] || [ "$KERNEL" = "2" ] || [ "$KERNEL" = "3" ]; then
+              echo ""
+              if [ "$KERNEL" = "2" ] || [ "$KERNEL" = "3" ]; then
+                  echo "*** Kernel update pending - reboot required ***"
+              fi
+              if [ "$SERVICES" -gt 0 ]; then
+                  echo "Services needing restart:"
+                  echo "$OUTPUT" | grep "^NEEDRESTART-SVC:" | sed 's/NEEDRESTART-SVC: /  - /'
+              fi
+              echo ""
+          fi
+
+    - name: Check which MOTD scripts exist
+      stat:
+        path: "/etc/update-motd.d/{{ item }}"
+      loop:
+        - 10-help-text
+        - 50-motd-news
+        - 88-esm-announce
+        - 91-contract-ua-esm-status
+      register: motd_scripts
+
+    - name: Disable MOTD scripts that generate noise
+      file:
+        path: "{{ item.stat.path }}"
+        mode: "-x"
+      loop: "{{ motd_scripts.results }}"
+      when: item.stat.exists
+
+    - name: Disable Ubuntu Pro advertising in apt
+      copy:
+        dest: /etc/apt/apt.conf.d/20apt-esm-hook.conf
+        content: 'DPkg::Post-Invoke { "rm -f /var/lib/ubuntu-advantage/messages/*.esm 2>/dev/null || true"; };'
+        mode: "0644"

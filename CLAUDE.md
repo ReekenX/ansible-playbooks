@@ -20,12 +20,6 @@ All playbooks are located in `playbooks/` directory and target `hosts: all` by d
 
 ### Running Playbooks
 
-Execute a playbook against a single host (note the comma):
-
-```bash
-ansible-playbook -i 123.123.123.123, playbooks/docker.yml
-```
-
 Execute a playbook with host limiting:
 
 ```bash
@@ -36,14 +30,6 @@ Check uptime across all servers:
 
 ```bash
 ansible all -m command -a uptime
-```
-
-### First-Time Server Setup
-
-New Ubuntu servers need Python 2.7 first:
-
-```bash
-ansible-playbook -i 123.123.123.123, playbooks/python.yml
 ```
 
 ## Development Workflow

@@ -18,6 +18,11 @@
         - ripgrep
         - neovim
         - fzy
+        - htop
+        - iftop
+        - iotop
+        - nmap
+        - whois
 
   - name: Check if private bash aliases exist
     stat:
@@ -37,7 +42,7 @@
   - name: Verify installed packages
     shell: |
       set -o pipefail
-      for pkg in git tree curl ripgrep neovim fzy; do
+      for pkg in git tree curl ripgrep neovim fzy htop iftop iotop nmap whois; do
         dpkg -s "$pkg" 2>/dev/null | grep -q "Status: install ok installed" && echo "$pkg: installed"
       done
     args:

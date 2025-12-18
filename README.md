@@ -56,23 +56,13 @@ Limit your command to only some hosts:
 | File name          | Description                                                                     |
 |--------------------|---------------------------------------------------------------------------------|
 | python.yml         | Install Python 2.7 for Ansible compatibility on recent Ubuntu servers.         |
-| locales.yml        | Install default locale to fix terminal from warnings                            |
 | upgrade.yml        | Upgrade server with dist-upgrade, disk space checks, kernel cleanup, and reboot detection. |
-| apache.yml         | Install apache; configure to support PHP, Ruby and Python projects.             |
 | dotfiles.yml       | Install dotfiles (see ReekenX/dotfiles repo) with highly reusable configs.      |
-| monitoring.yml     | Install packages for networking and CPU usage monitoring.                       |
-| development.yml    | Install packages usually used in by engineers (git, rg, neovim, etc.)           |
-| ruby_dev.yml       | Install packages every Ruby developer uses.                                     |
-| python_dev.yml     | Install packages every Python developer uses.                                   |
-| php_dev.yml        | Install packages every PHP developer uses.                                      |
-| javascript_dev.yml | Install packages every JavaScript developer uses. Not finished yet.             |
+| development.yml    | Install development and monitoring tools (git, rg, neovim, htop, iftop, etc.)   |
 | docker.yml         | Install Docker Engine from official repository with compose and buildx plugins. |
 | firewall.yml       | Install and configure UFW firewall with Docker compatibility. HTTP/HTTPS/SSH rate-limited access. |
-| pil.yml            | Install and configure Python Imaging library (PIL).                             |
-| apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily cron-based backups to /var/backups. Includes custom conf for every machine. |
 | motd.yml           | Clean up Ubuntu MOTD, add figlet banner and needrestart notifications.          |
-| nagios-nrpe.yml    | NRPE server configuration, setup and plugins install.                           |
 
 # Contribution
 

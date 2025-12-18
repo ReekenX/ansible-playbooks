@@ -101,8 +101,6 @@ ansible-playbook -i 123.123.123.123, playbooks/python.yml
 **System Administration:**
 
 - `upgrade.yml` - System package upgrades with kernel cleanup
-- `locales.yml` - Locale configuration
-- `apport_errors.yml` - Disable GUI error reporting
 
 **Security:**
 
@@ -111,18 +109,11 @@ ansible-playbook -i 123.123.123.123, playbooks/python.yml
 
 **Development Environments:**
 
-- `development.yml` - Generic dev tools (git, ripgrep, neovim, fzy, tree, curl)
-- `python_dev.yml` - Python development packages
-- `ruby_dev.yml` - Ruby development packages
-- `php_dev.yml` - PHP development packages
-- `javascript_dev.yml` - JavaScript development packages (incomplete)
+- `development.yml` - Dev and monitoring tools (git, ripgrep, neovim, fzy, tree, curl, htop, iftop, iotop, nmap, whois)
 
 **Server Services:**
 
 - `docker.yml` - Docker Engine installation (removes old versions, adds official repository)
-- `apache.yml` - Apache with PHP, Ruby, Python support
-- `monitoring.yml` - Network and CPU monitoring tools
-- `nagios-nrpe.yml` - NRPE server with plugins
 
 **User Configuration:**
 
@@ -132,7 +123,6 @@ ansible-playbook -i 123.123.123.123, playbooks/python.yml
 
 **Libraries:**
 
-- `pil.yml` - Python Imaging Library
 - `python.yml` - Python 2.7 for Ansible compatibility
 
 ## Important Notes

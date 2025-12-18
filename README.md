@@ -71,6 +71,7 @@ Limit your command to only some hosts:
 | pil.yml            | Install and configure Python Imaging library (PIL).                             |
 | apport_errors.yml  | Disable apport which gives modal about GUI errors.                              |
 | backups.yml        | Daily cron-based backups to /var/backups. Includes custom conf for every machine. |
+| motd.yml           | Clean up Ubuntu MOTD, add figlet banner and needrestart notifications.          |
 | nagios-nrpe.yml    | NRPE server configuration, setup and plugins install.                           |
 
 # Contribution

@@ -61,6 +61,7 @@ Limit your command to only some hosts:
 | development.yml    | Install development and monitoring tools (git, rg, neovim, htop, iftop, etc.)   |
 | docker.yml         | Install Docker Engine from official repository with compose and buildx plugins. |
 | firewall.yml       | Install and configure UFW firewall with Docker compatibility. HTTP/HTTPS/SSH rate-limited access. |
+| lock.yml           | Lock down server to SSH-only access with rate limiting. Blocks all other incoming traffic.         |
 | backups.yml        | Daily cron-based backups to /var/backups. Includes custom conf for every machine. |
 | motd.yml           | Clean up Ubuntu MOTD, add figlet banner and needrestart notifications.          |
 

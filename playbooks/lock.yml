@@ -1,0 +1,46 @@
+---
+# Lock down server to SSH-only access
+# Blocks all incoming traffic except SSH with rate limiting
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install UFW
+    apt:
+      update_cache: yes
+      pkg:
+        - ufw
+
+  - name: Set UFW default policies
+    community.general.ufw:
+      direction: "{{ item.direction }}"
+      policy: "{{ item.policy }}"
+    loop:
+      - { direction: 'incoming', policy: 'deny' }
+      - { direction: 'outgoing', policy: 'allow' }
+
+  - name: Allow SSH with rate limiting
+    community.general.ufw:
+      rule: limit
+      port: '22'
+      proto: tcp
+      comment: 'SSH with rate limiting'
+
+  - name: Enable UFW
+    community.general.ufw:
+      state: enabled
+
+  - name: Ensure UFW service is started and enabled
+    systemd:
+      name: ufw
+      state: started
+      enabled: yes
+
+  - name: Get UFW status
+    command: ufw status verbose
+    register: ufw_status
+    changed_when: false
+
+  - name: Display UFW status
+    debug:
+      msg: "{{ ufw_status.stdout_lines }}"

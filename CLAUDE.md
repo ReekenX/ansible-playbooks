@@ -92,6 +92,7 @@ ansible all -m command -a uptime
 
 - `security_updates.yml` - Automatic security updates via unattended-upgrades
 - `firewall.yml` - UFW firewall with Docker compatibility, rate-limited SSH/HTTP/HTTPS access
+- `lock.yml` - Lock down server to SSH-only access with rate limiting
 
 **Development Environments:**
 

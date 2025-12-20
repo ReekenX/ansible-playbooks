@@ -11,6 +11,10 @@
       pkg:
         - ufw
 
+  - name: Reset UFW to clear all existing rules
+    community.general.ufw:
+      state: reset
+
   - name: Set UFW default policies
     community.general.ufw:
       direction: "{{ item.direction }}"

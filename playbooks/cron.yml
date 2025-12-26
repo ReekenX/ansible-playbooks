@@ -1,0 +1,15 @@
+---
+# Configure cron environment variables
+
+- hosts: all
+  tasks:
+    - name: Set cron environment variables
+      ansible.builtin.cron:
+        name: "{{ item.name }}"
+        env: yes
+        job: "{{ item.value }}"
+      loop:
+        - { name: SHELL, value: /bin/bash }
+        - { name: MAILTO, value: root }
+        - { name: CRON_TZ, value: Europe/Vilnius }
+        - { name: PATH, value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin }

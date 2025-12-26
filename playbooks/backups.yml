@@ -1,7 +1,7 @@
 ---
 # Database backup script
 #
-# Backs up databases defined in host_vars to /var/backups with best compression.
+# Backs up databases defined in host_vars to /var/backups/daily with best compression.
 # Runs daily at 4:00 AM via cron.
 #
 # Configure databases in host_vars/<hostname>.yml:
@@ -14,6 +14,14 @@
 
 - hosts: all
   tasks:
+    - name: Create daily backup directory
+      file:
+        path: /var/backups/daily
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
     - name: Install backup script from template
       template:
         src: templates/backup-databases.sh.j2
@@ -24,7 +32,7 @@
 
     - name: Install backups cron entry
       cron:
-        name: "Database backups to /var/backups"
+        name: "Database backups to /var/backups/daily"
         minute: "0"
         hour: "4"
         job: "/usr/bin/nice -n 20 /usr/sbin/make-backups"

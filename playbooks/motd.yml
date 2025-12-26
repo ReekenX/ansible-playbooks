@@ -5,7 +5,7 @@
 #
 # Configure banner in host_vars/<hostname>.yml:
 #
-#   motd_banner: "weld.lt server"
+#   motd_banner: "example.com server"
 
 - hosts: all
   become: yes
@@ -27,7 +27,7 @@
         mode: "0755"
         content: |
           #!/bin/bash
-          figlet "{{ motd_banner }}"
+          figlet " {{ motd_banner | replace(' ', '  ') }}"
 
     - name: Create needrestart MOTD script
       copy:

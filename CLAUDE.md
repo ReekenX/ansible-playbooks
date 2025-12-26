@@ -106,6 +106,7 @@ ansible all -m command -a uptime
 
 - `dotfiles.yml` - Install dotfiles from ReekenX/dotfiles repository
 - `backups.yml` - Daily cron-based backups to /var/backups, creates backup-sync user
+- `cron.yml` - Configure cron environment variables (SHELL, MAILTO, CRON_TZ, PATH)
 - `motd.yml` - Clean Ubuntu MOTD, add figlet banner (configurable via `motd_banner`) and needrestart notifications
 
 **Libraries:**

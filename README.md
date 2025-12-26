@@ -63,6 +63,7 @@ Limit your command to only some hosts:
 | firewall.yml       | Install and configure UFW firewall with Docker compatibility. HTTP/HTTPS/SSH rate-limited access. |
 | lock.yml           | Lock down server to SSH-only access with rate limiting. Blocks all other incoming traffic.         |
 | backups.yml        | Daily cron-based backups to /var/backups. Includes custom conf for every machine. |
+| cron.yml           | Configure cron environment variables (SHELL, MAILTO, CRON_TZ, PATH).            |
 | motd.yml           | Clean up Ubuntu MOTD, add figlet banner and needrestart notifications.          |
 
 # Contribution

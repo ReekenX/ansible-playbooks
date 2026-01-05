@@ -34,7 +34,7 @@
   - name: Copy Bash aliases
     copy:
       src: "{{ playbook_dir }}/../private/files/.bash_aliases"
-      dest: "{{ ansible_env.HOME }}/.bash_aliases"
+      dest: "{{ ansible_facts['env']['HOME'] }}/.bash_aliases"
       mode: '0644'
     become: no
     when: bash_aliases_file.stat.exists

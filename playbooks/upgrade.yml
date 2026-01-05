@@ -4,10 +4,10 @@
 
   tasks:
   - name: Check available disk space
-    shell: df / --output=pcent | tail -1 | tr -d ' %'
-    register: disk_usage
+    shell: df / --output=avail | tail -1 | tr -d ' '
+    register: disk_avail_kb
     changed_when: false
-    failed_when: disk_usage.stdout | int > 90
+    failed_when: disk_avail_kb.stdout | int < 1048576
 
   - name: Update APT package cache
     apt:
